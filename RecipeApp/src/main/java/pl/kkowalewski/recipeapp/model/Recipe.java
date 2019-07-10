@@ -2,10 +2,13 @@ package pl.kkowalewski.recipeapp.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Set;
@@ -28,13 +31,19 @@ public class Recipe {
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
+    @ManyToMany
+    private Set<Category> categories;
 
     /*------------------------ METHODS REGION ------------------------*/
+
     public Recipe(String description, String source, String url, String direction,
                   Integer preparationTime, Integer cockTime, Integer servings, Byte[] image,
-                  Notes notes) {
+                  Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
+                  Set<Category> categories) {
         this.description = description;
         this.source = source;
         this.url = url;
@@ -44,6 +53,9 @@ public class Recipe {
         this.servings = servings;
         this.image = image;
         this.notes = notes;
+        this.difficulty = difficulty;
+        this.ingredients = ingredients;
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -86,7 +98,15 @@ public class Recipe {
         return notes;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
     public Set<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 }
