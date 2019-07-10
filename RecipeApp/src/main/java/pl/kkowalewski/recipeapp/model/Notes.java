@@ -20,7 +20,7 @@ public class Notes {
     private String recipeNotes;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public Notes(Recipe recipe, String recipeNotes) {
+    public Notes(final Recipe recipe, final String recipeNotes) {
         this.recipe = recipe;
         this.recipeNotes = recipeNotes;
     }

@@ -15,7 +15,7 @@ public class UnitOfMeasure {
     private String description;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public UnitOfMeasure(String description) {
+    public UnitOfMeasure(final String description) {
         this.description = description;
     }
 

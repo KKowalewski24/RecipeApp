@@ -19,7 +19,7 @@ public class Category {
     private Set<Recipe> recipes;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public Category(String description, Set<Recipe> recipes) {
+    public Category(final String description, final Set<Recipe> recipes) {
         this.description = description;
         this.recipes = recipes;
     }

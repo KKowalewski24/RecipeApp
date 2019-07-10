@@ -44,10 +44,11 @@ public class Recipe {
     private Set<Category> categories;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public Recipe(String description, String source, String url, String direction,
-                  Integer preparationTime, Integer cockTime, Integer servings, Byte[] image,
-                  Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
-                  Set<Category> categories) {
+    public Recipe(final String description, final String source, final String url,
+                  final String direction, final Integer preparationTime, final Integer cockTime,
+                  final Integer servings, final Byte[] image, final Notes notes,
+                  final Difficulty difficulty, final Set<Ingredient> ingredients,
+                  final Set<Category> categories) {
         this.description = description;
         this.source = source;
         this.url = url;
