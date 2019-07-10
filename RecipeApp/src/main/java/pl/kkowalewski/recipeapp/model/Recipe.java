@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -26,11 +28,10 @@ public class Recipe {
     private Byte[] image;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public Recipe() {
-    }
-
     public Recipe(String description, String source, String url, String direction,
                   Integer preparationTime, Integer cockTime, Integer servings, Byte[] image,
                   Notes notes) {
@@ -83,5 +84,9 @@ public class Recipe {
 
     public Notes getNotes() {
         return notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
     }
 }
