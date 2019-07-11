@@ -11,6 +11,7 @@ import pl.kkowalewski.recipeapp.repository.CategoryRepository;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 import pl.kkowalewski.recipeapp.repository.UnitOfMeasureRepository;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Component
@@ -25,8 +26,21 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private GuacamoleNotes guacamoleNotesBundle = new GuacamoleNotes();
     private TacosRecipe tacosRecipeBundle = new TacosRecipe();
     private TacosNotes tacosNotesBundle = new TacosNotes();
-    private GuacamoleIngredient guacamoleIngredientBundle = new GuacamoleIngredient();
-    private TacosIngredient tacosIngredientBundle = new TacosIngredient();
+
+    private UnitOfMeasure eachUom;
+    private UnitOfMeasure tableSpoonUom;
+    private UnitOfMeasure teapoonUom;
+    private UnitOfMeasure dashUom;
+    private UnitOfMeasure pintUom;
+    private UnitOfMeasure cupsUom;
+
+    private Category americanCategory;
+    private Category mexicanCategory;
+
+    private Recipe guacamoleRecipe;
+    private Notes guacamoleNotes;
+    private Recipe tacosRecipe;
+    private Notes tacosNotes;
 
     /*------------------------ METHODS REGION ------------------------*/
     public RecipeBootstrap(CategoryRepository categoryRepository,
@@ -37,7 +51,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
-    public Optional<UnitOfMeasure> checkUnits(String description) {
+    private Optional<UnitOfMeasure> checkUnits(String description) {
         Optional<UnitOfMeasure> unit = unitOfMeasureRepository.findByDescription(description);
 
         if (!unit.isPresent()) {
@@ -47,7 +61,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         return unit;
     }
 
-    public Optional<Category> checkCategory(String description) {
+    private Optional<Category> checkCategory(String description) {
         Optional<Category> category = categoryRepository.findByDescription(description);
 
         if (!category.isPresent()) {
@@ -67,28 +81,96 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         return categories;
     }
 
+    private Set<Ingredient> prepareGuacamoleIngredientsSet() {
+        Set<Ingredient> ingredients = new HashSet<>();
+
+        ingredients.add(new Ingredient("ripe avocados", new BigDecimal(2), eachUom,
+                guacamoleRecipe));
+        ingredients.add(new Ingredient("Kosher salt", new BigDecimal(".5"), teapoonUom,
+                guacamoleRecipe));
+        ingredients.add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2),
+                tableSpoonUom, guacamoleRecipe));
+        ingredients.add(new Ingredient("minced red onion or thinly sliced green onion",
+                new BigDecimal(2), tableSpoonUom, guacamoleRecipe));
+        ingredients.add(new Ingredient("serrano chiles, stems and seeds removed, minced",
+                new BigDecimal(2), eachUom, guacamoleRecipe));
+        ingredients.add(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUom,
+                guacamoleRecipe));
+        ingredients.add(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom,
+                guacamoleRecipe));
+        ingredients.add(new Ingredient("ripe tomato, seeds and pulp removed, chopped",
+                new BigDecimal(".5"), eachUom, guacamoleRecipe));
+
+        return ingredients;
+    }
+
+    private Set<Ingredient> prepareTacosIngredientsSet() {
+        Set<Ingredient> ingredients = new HashSet<>();
+
+        ingredients.add(new Ingredient("Ancho Chili Powder", new BigDecimal(2),
+                tableSpoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Dried Oregano", new BigDecimal(1),
+                teapoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Dried Cumin", new BigDecimal(1),
+                teapoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Sugar", new BigDecimal(1),
+                teapoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Salt", new BigDecimal(".5"),
+                teapoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("finely grated orange zestr", new BigDecimal(1),
+                tableSpoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3),
+                tableSpoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("Olive Oil", new BigDecimal(2),
+                tableSpoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("boneless chicken thighs", new BigDecimal(4),
+                tableSpoonUom, tacosRecipe));
+        ingredients.add(new Ingredient("small corn tortillasr", new BigDecimal(8),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("packed baby arugula", new BigDecimal(3),
+                cupsUom, tacosRecipe));
+        ingredients.add(new Ingredient("medium ripe avocados, slic", new BigDecimal(2),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("radishes, thinly sliced", new BigDecimal(4),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("cherry tomatoes, halved", new BigDecimal(".5"),
+                pintUom, tacosRecipe));
+        ingredients.add(new Ingredient("red onion, thinly sliced", new BigDecimal(".25"),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("Roughly chopped cilantro", new BigDecimal(4),
+                eachUom, tacosRecipe));
+        ingredients.add(new Ingredient("cup sour cream thinned with 1/4 cup milk",
+                new BigDecimal(4), cupsUom, tacosRecipe));
+        ingredients.add(new Ingredient("lime, cut into wedges", new BigDecimal(4),
+                eachUom, tacosRecipe));
+
+        return ingredients;
+    }
+
     private List<Recipe> prepareRecipesList() {
         List<Recipe> recipes = new ArrayList<>();
 
         /*------------------------ CHECK ------------------------*/
-        UnitOfMeasure eachUom = checkUnits("Each").get();
-        UnitOfMeasure tableSpoonUom = checkUnits("Tablespoon").get();
-        UnitOfMeasure teapoonUom = checkUnits("Teaspoon").get();
-        UnitOfMeasure dashUom = checkUnits("Dash").get();
-        UnitOfMeasure pintUom = checkUnits("Pint").get();
-        UnitOfMeasure cupsUom = checkUnits("Cup").get();
+        eachUom = checkUnits("Each").get();
+        tableSpoonUom = checkUnits("Tablespoon").get();
+        teapoonUom = checkUnits("Teaspoon").get();
+        dashUom = checkUnits("Dash").get();
+        pintUom = checkUnits("Pint").get();
+        cupsUom = checkUnits("Cup").get();
 
-        Category americanCategory = checkCategory("American").get();
-        Category mexicanCategory = checkCategory("Mexican").get();
+        americanCategory = checkCategory("American").get();
+        mexicanCategory = checkCategory("Mexican").get();
 
         /*------------------------ GUACAMOLE------------------------*/
-        Notes guacamoleNotes = new Notes();
-        Recipe guacamoleRecipe = new Recipe(
+        guacamoleNotes = new Notes();
+        guacamoleRecipe = new Recipe(
                 guacamoleRecipeBundle.getObject("_description").toString(),
                 guacamoleRecipeBundle.getObject("_directions").toString(),
                 Integer.parseInt(guacamoleRecipeBundle.getObject("_prepTime").toString()),
                 Integer.parseInt(guacamoleRecipeBundle.getObject("_cookTime").toString()),
-                guacamoleNotes, Difficulty.EASY, guacamoleIngredientBundle.ingredients,
+                guacamoleNotes, Difficulty.EASY, prepareGuacamoleIngredientsSet(),
                 prepareCategoriesSet(americanCategory,
                         mexicanCategory));
 
@@ -96,13 +178,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleNotes.setRecipeNotes(guacamoleNotesBundle.getObject("_description").toString());
 
         /*------------------------ TACOS ------------------------*/
-        Notes tacosNotes = new Notes();
-        Recipe tacosRecipe = new Recipe(
+        tacosNotes = new Notes();
+        tacosRecipe = new Recipe(
                 tacosRecipeBundle.getObject("_description").toString(),
                 tacosRecipeBundle.getObject("_directions").toString(),
                 Integer.parseInt(tacosRecipeBundle.getObject("_prepTime").toString()),
                 Integer.parseInt(tacosRecipeBundle.getObject("_cookTime").toString()),
-                guacamoleNotes, Difficulty.MEDIUM, tacosIngredientBundle.ingredients,
+                guacamoleNotes, Difficulty.MEDIUM, prepareTacosIngredientsSet(),
                 prepareCategoriesSet(americanCategory,
                         mexicanCategory));
 
