@@ -64,6 +64,9 @@ public class Recipe {
 //        this.categories = categories;
 //    }
 
+    public Recipe() {
+    }
+
     public Recipe(String description, String direction, Integer preparationTime, Integer cockTime,
                   Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
                   Set<Category> categories) {
