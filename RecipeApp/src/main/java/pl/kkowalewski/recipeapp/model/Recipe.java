@@ -25,6 +25,7 @@ public class Recipe {
     private String description;
     private String source;
     private String url;
+    @Lob
     private String direction;
     private Integer preparationTime;
     private Integer cockTime;
@@ -44,19 +45,32 @@ public class Recipe {
     private Set<Category> categories;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public Recipe(final String description, final String source, final String url,
-                  final String direction, final Integer preparationTime, final Integer cockTime,
-                  final Integer servings, final Byte[] image, final Notes notes,
-                  final Difficulty difficulty, final Set<Ingredient> ingredients,
-                  final Set<Category> categories) {
+//    public Recipe(final String description, final String source, final String url,
+//                  final String direction, final Integer preparationTime, final Integer cockTime,
+//                  final Integer servings, final Byte[] image, final Notes notes,
+//                  final Difficulty difficulty, final Set<Ingredient> ingredients,
+//                  final Set<Category> categories) {
+//        this.description = description;
+//        this.source = source;
+//        this.url = url;
+//        this.direction = direction;
+//        this.preparationTime = preparationTime;
+//        this.cockTime = cockTime;
+//        this.servings = servings;
+//        this.image = image;
+//        this.notes = notes;
+//        this.difficulty = difficulty;
+//        this.ingredients = ingredients;
+//        this.categories = categories;
+//    }
+
+    public Recipe(String description, String direction, Integer preparationTime, Integer cockTime,
+                  Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
+                  Set<Category> categories) {
         this.description = description;
-        this.source = source;
-        this.url = url;
         this.direction = direction;
         this.preparationTime = preparationTime;
         this.cockTime = cockTime;
-        this.servings = servings;
-        this.image = image;
         this.notes = notes;
         this.difficulty = difficulty;
         this.ingredients = ingredients;

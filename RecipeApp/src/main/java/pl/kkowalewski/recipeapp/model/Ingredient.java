@@ -26,6 +26,9 @@ public class Ingredient {
     private Recipe recipe;
 
     /*------------------------ METHODS REGION ------------------------*/
+    public Ingredient() {
+    }
+
     public Ingredient(final String description, final BigDecimal amount, final UnitOfMeasure unit,
                       final Recipe recipe) {
         this.description = description;

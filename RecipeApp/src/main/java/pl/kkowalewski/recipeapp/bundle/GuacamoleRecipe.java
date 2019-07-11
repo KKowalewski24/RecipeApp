@@ -4,7 +4,7 @@ import pl.kkowalewski.recipeapp.model.Difficulty;
 
 import java.util.ListResourceBundle;
 
-public class GuacamoleRecipe_en extends ListResourceBundle {
+public class GuacamoleRecipe extends ListResourceBundle {
 
     /*------------------------ FIELDS REGION ------------------------*/
 
@@ -15,7 +15,6 @@ public class GuacamoleRecipe_en extends ListResourceBundle {
                 {"_description", "Perfect Guacamole"},
                 {"_prepTime", 10},
                 {"_cookTime", 0},
-                {"_difficulty", Difficulty.EASY},
                 {"_directions", "1 Cut avocado, remove flesh: Cut the avocados in half. Remove " +
                         "seed. Score the inside of the avocado with a blunt knife and scoop out " +
                         "the flesh with a spoon\n2 Mash with a fork: Using a fork, roughly mash " +

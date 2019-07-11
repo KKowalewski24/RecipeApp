@@ -3,19 +3,15 @@ package pl.kkowalewski.recipeapp.bootstrap;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import pl.kkowalewski.recipeapp.bundle.*;
 import pl.kkowalewski.recipeapp.exception.CategoryException;
 import pl.kkowalewski.recipeapp.exception.UnitsException;
-import pl.kkowalewski.recipeapp.model.Category;
-import pl.kkowalewski.recipeapp.model.Notes;
-import pl.kkowalewski.recipeapp.model.Recipe;
-import pl.kkowalewski.recipeapp.model.UnitOfMeasure;
+import pl.kkowalewski.recipeapp.model.*;
 import pl.kkowalewski.recipeapp.repository.CategoryRepository;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 import pl.kkowalewski.recipeapp.repository.UnitOfMeasureRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -24,6 +20,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+
+    private GuacamoleRecipe guacamoleRecipeBundle = new GuacamoleRecipe();
+    private GuacamoleNotes guacamoleNotesBundle = new GuacamoleNotes();
+    private TacosRecipe tacosRecipeBundle = new TacosRecipe();
+    private TacosNotes tacosNotesBundle = new TacosNotes();
+    private GuacamoleIngredient guacamoleIngredientBundle = new GuacamoleIngredient();
+    private TacosIngredient tacosIngredientBundle = new TacosIngredient();
 
     /*------------------------ METHODS REGION ------------------------*/
     public RecipeBootstrap(CategoryRepository categoryRepository,
@@ -54,17 +57,20 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         return category;
     }
 
-    private void prepareNotes() {
+    private Set<Category> prepareCategoriesSet(Category... category) {
+        Set<Category> categories = new HashSet<>();
 
-    }
+        for (Category it : category) {
+            categories.add(it);
+        }
 
-    private void prepareRecipe() {
-
+        return categories;
     }
 
     private List<Recipe> prepareRecipesList() {
         List<Recipe> recipes = new ArrayList<>();
 
+        /*------------------------ CHECK ------------------------*/
         UnitOfMeasure eachUom = checkUnits("Each").get();
         UnitOfMeasure tableSpoonUom = checkUnits("Tablespoon").get();
         UnitOfMeasure teapoonUom = checkUnits("Teaspoon").get();
@@ -75,14 +81,37 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Category americanCategory = checkCategory("American").get();
         Category mexicanCategory = checkCategory("Mexican").get();
 
-//        Notes guacamoleNotes = new Notes();
-//        Recipe guacamoleRecipe = new Recipe();
-//
-//        Notes tacoNotes = new Notes();
-//        Recipe tacosRecipe = new Recipe();
-//
-//        recipes.add(guacamoleRecipe);
-//        recipes.add(tacosRecipe);
+        /*------------------------ GUACAMOLE------------------------*/
+        Notes guacamoleNotes = new Notes();
+        Recipe guacamoleRecipe = new Recipe(
+                guacamoleRecipeBundle.getObject("_description").toString(),
+                guacamoleRecipeBundle.getObject("_directions").toString(),
+                Integer.parseInt(guacamoleRecipeBundle.getObject("_prepTime").toString()),
+                Integer.parseInt(guacamoleRecipeBundle.getObject("_cookTime").toString()),
+                guacamoleNotes, Difficulty.EASY, guacamoleIngredientBundle.ingredients,
+                prepareCategoriesSet(americanCategory,
+                        mexicanCategory));
+
+        guacamoleNotes.setRecipe(guacamoleRecipe);
+        guacamoleNotes.setRecipeNotes(guacamoleNotesBundle.getObject("_description").toString());
+
+        /*------------------------ TACOS ------------------------*/
+        Notes tacosNotes = new Notes();
+        Recipe tacosRecipe = new Recipe(
+                tacosRecipeBundle.getObject("_description").toString(),
+                tacosRecipeBundle.getObject("_directions").toString(),
+                Integer.parseInt(tacosRecipeBundle.getObject("_prepTime").toString()),
+                Integer.parseInt(tacosRecipeBundle.getObject("_cookTime").toString()),
+                guacamoleNotes, Difficulty.MEDIUM, tacosIngredientBundle.ingredients,
+                prepareCategoriesSet(americanCategory,
+                        mexicanCategory));
+
+        tacosNotes.setRecipe(tacosRecipe);
+        tacosNotes.setRecipeNotes(tacosNotesBundle.getObject("_description").toString());
+
+        /*------------------------ ADD TO SET ------------------------*/
+        recipes.add(guacamoleRecipe);
+        recipes.add(tacosRecipe);
 
         return recipes;
     }
