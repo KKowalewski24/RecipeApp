@@ -20,6 +20,9 @@ public class Notes {
     private String recipeNotes;
 
     /*------------------------ METHODS REGION ------------------------*/
+    public Notes() {
+    }
+
     public Notes(final Recipe recipe, final String recipeNotes) {
         this.recipe = recipe;
         this.recipeNotes = recipeNotes;
@@ -35,5 +38,15 @@ public class Notes {
 
     public String getRecipeNotes() {
         return recipeNotes;
+    }
+
+    public Notes setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+        return this;
+    }
+
+    public Notes setRecipeNotes(String recipeNotes) {
+        this.recipeNotes = recipeNotes;
+        return this;
     }
 }
