@@ -1,5 +1,8 @@
 package pl.kkowalewski.recipeapp.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -26,27 +31,5 @@ public class Notes {
     public Notes(final Recipe recipe, final String recipeNotes) {
         this.recipe = recipe;
         this.recipeNotes = recipeNotes;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public String getRecipeNotes() {
-        return recipeNotes;
-    }
-
-    public Notes setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-        return this;
-    }
-
-    public Notes setRecipeNotes(String recipeNotes) {
-        this.recipeNotes = recipeNotes;
-        return this;
     }
 }

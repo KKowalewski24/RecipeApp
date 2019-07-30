@@ -1,5 +1,7 @@
 package pl.kkowalewski.recipeapp.model;
 
+import lombok.Data;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Set;
 
+@Data
 @Entity
 public class Recipe {
 
@@ -78,57 +81,5 @@ public class Recipe {
         this.difficulty = difficulty;
         this.ingredients = ingredients;
         this.categories = categories;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public Integer getPreparationTime() {
-        return preparationTime;
-    }
-
-    public Integer getCockTime() {
-        return cockTime;
-    }
-
-    public Integer getServings() {
-        return servings;
-    }
-
-    public Byte[] getImage() {
-        return image;
-    }
-
-    public Notes getNotes() {
-        return notes;
-    }
-
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
     }
 }
