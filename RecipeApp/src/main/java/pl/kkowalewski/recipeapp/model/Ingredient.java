@@ -1,5 +1,8 @@
 package pl.kkowalewski.recipeapp.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.Entity;
@@ -55,5 +58,48 @@ public class Ingredient {
 
     public Recipe getRecipe() {
         return recipe;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Ingredient that = (Ingredient) o;
+
+        return new EqualsBuilder()
+                .append(id, that.id)
+                .append(description, that.description)
+                .append(amount, that.amount)
+                .append(unit, that.unit)
+                .append(recipe, that.recipe)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(description)
+                .append(amount)
+                .append(unit)
+                .append(recipe)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("description", description)
+                .append("amount", amount)
+                .append("unit", unit)
+                .append("recipe", recipe)
+                .toString();
     }
 }

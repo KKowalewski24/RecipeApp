@@ -1,5 +1,9 @@
 package pl.kkowalewski.recipeapp.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -130,5 +134,72 @@ public class Recipe {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Recipe recipe = (Recipe) o;
+
+        return new EqualsBuilder()
+                .append(id, recipe.id)
+                .append(description, recipe.description)
+                .append(source, recipe.source)
+                .append(url, recipe.url)
+                .append(direction, recipe.direction)
+                .append(preparationTime, recipe.preparationTime)
+                .append(cockTime, recipe.cockTime)
+                .append(servings, recipe.servings)
+                .append(image, recipe.image)
+                .append(notes, recipe.notes)
+                .append(difficulty, recipe.difficulty)
+                .append(ingredients, recipe.ingredients)
+                .append(categories, recipe.categories)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(description)
+                .append(source)
+                .append(url)
+                .append(direction)
+                .append(preparationTime)
+                .append(cockTime)
+                .append(servings)
+                .append(image)
+                .append(notes)
+                .append(difficulty)
+                .append(ingredients)
+                .append(categories)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("description", description)
+                .append("source", source)
+                .append("url", url)
+                .append("direction", direction)
+                .append("preparationTime", preparationTime)
+                .append("cockTime", cockTime)
+                .append("servings", servings)
+                .append("image", image)
+                .append("notes", notes)
+                .append("difficulty", difficulty)
+                .append("ingredients", ingredients)
+                .append("categories", categories)
+                .toString();
     }
 }
