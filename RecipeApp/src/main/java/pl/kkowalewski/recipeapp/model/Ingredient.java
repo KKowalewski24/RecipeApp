@@ -1,7 +1,5 @@
 package pl.kkowalewski.recipeapp.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.Entity;
@@ -13,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -39,5 +35,25 @@ public class Ingredient {
         this.amount = amount;
         this.unit = unit;
         this.recipe = recipe;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public UnitOfMeasure getUnit() {
+        return unit;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
     }
 }
