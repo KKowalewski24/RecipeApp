@@ -10,6 +10,7 @@ public class IndexController {
 
     /*------------------------ FIELDS REGION ------------------------*/
     public static final String DESCRIPTION = "index";
+    public static final String ATTRIBUTE = "recipes";
 
     private final RecipeService recipeService;
 
@@ -20,7 +21,7 @@ public class IndexController {
 
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage(Model model) {
-        model.addAttribute("recipes", recipeService.prepareRecipeSet());
+        model.addAttribute(ATTRIBUTE, recipeService.prepareRecipeSet());
 
         return DESCRIPTION;
     }

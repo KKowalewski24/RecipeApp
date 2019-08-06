@@ -71,6 +71,10 @@ public class Recipe {
     public Recipe() {
     }
 
+    public Recipe(Long id) {
+        this.id = id;
+    }
+
     public Recipe(String description, String direction, Integer preparationTime, Integer cockTime,
                   Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
                   Set<Category> categories) {
@@ -86,6 +90,10 @@ public class Recipe {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
