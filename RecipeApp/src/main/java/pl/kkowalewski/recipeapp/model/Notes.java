@@ -44,16 +44,6 @@ public class Notes {
         return recipeNotes;
     }
 
-    public Notes setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-        return this;
-    }
-
-    public Notes setRecipeNotes(String recipeNotes) {
-        this.recipeNotes = recipeNotes;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
