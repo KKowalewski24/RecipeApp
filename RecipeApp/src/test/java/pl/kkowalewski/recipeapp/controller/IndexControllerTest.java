@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.service.RecipeService;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,6 +42,13 @@ public class IndexControllerTest {
         indexController = new IndexController(recipeService);
     }
 
+    private Set<Recipe> prepareSet() {
+        return new HashSet<>(Arrays.asList(
+                new Recipe(1L),
+                new Recipe(2L)
+        ));
+    }
+
     @Test
     public void mockMvcTest() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
@@ -51,9 +59,7 @@ public class IndexControllerTest {
 
     @Test
     public void getIndexPage() {
-        Set<Recipe> recipes = new HashSet<>();
-        recipes.add(new Recipe(1L));
-        recipes.add(new Recipe(2L));
+        Set<Recipe> recipes = prepareSet();
         when(recipeService.prepareRecipeSet()).thenReturn(recipes);
 
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);

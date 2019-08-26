@@ -8,16 +8,25 @@ import org.mockito.junit.MockitoJUnitRunner;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceImplTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
+    private static final Long RECIPE_ID = 1L;
+
     private RecipeService recipeService;
 
     @Mock
@@ -29,15 +38,28 @@ public class RecipeServiceImplTest {
         recipeService = new RecipeServiceImpl(recipeRepository);
     }
 
+    private Recipe prepareRecipe() {
+        return new Recipe(RECIPE_ID);
+    }
+
     @Test
     public void prepareRecipeSet() {
-        Set<Recipe> recipesData = new HashSet();
-        Recipe recipe = new Recipe();
-        recipesData.add(recipe);
+        Set<Recipe> recipesData = new HashSet<>(Arrays.asList(prepareRecipe()));
         when(recipeService.prepareRecipeSet()).thenReturn(recipesData);
         Set<Recipe> recipes = recipeService.prepareRecipeSet();
 
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void findByIdTest() {
+        Optional<Recipe> recipeOptional = Optional.of(prepareRecipe());
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        Recipe recipe = recipeService.findById(RECIPE_ID);
+
+        assertNotNull(recipe);
+        verify(recipeRepository).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 }
