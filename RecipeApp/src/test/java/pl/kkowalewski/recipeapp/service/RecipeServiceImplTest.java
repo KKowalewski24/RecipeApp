@@ -2,17 +2,19 @@ package pl.kkowalewski.recipeapp.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceImplTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
@@ -24,7 +26,6 @@ public class RecipeServiceImplTest {
     /*------------------------ METHODS REGION ------------------------*/
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository);
     }
 

@@ -9,7 +9,9 @@ import pl.kkowalewski.recipeapp.service.RecipeService;
 public class IndexController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String DESCRIPTION = "index";
+    public static final String ROOT = "";
+    public static final String SLASH = "/";
+    public static final String INDEX = "/index";
     public static final String ATTRIBUTE = "recipes";
 
     private final RecipeService recipeService;
@@ -19,10 +21,10 @@ public class IndexController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"", "/", "/index"})
+    @RequestMapping({ROOT, SLASH, INDEX})
     public String getIndexPage(Model model) {
         model.addAttribute(ATTRIBUTE, recipeService.prepareRecipeSet());
 
-        return DESCRIPTION;
+        return INDEX.substring(1);
     }
 }
