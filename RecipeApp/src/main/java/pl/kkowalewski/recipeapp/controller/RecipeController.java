@@ -10,8 +10,8 @@ import pl.kkowalewski.recipeapp.service.RecipeService;
 public class RecipeController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    private static final String RECIPE_SHOW = "/recipe/show";
-    private static final String ATTRIBUTE = "recipe";
+    public static final String RECIPE_SHOW = "/recipe/show";
+    public static final String ATTRIBUTE = "recipe";
 
     private final RecipeService recipeService;
 

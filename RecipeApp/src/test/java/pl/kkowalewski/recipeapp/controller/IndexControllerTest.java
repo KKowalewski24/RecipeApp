@@ -60,17 +60,14 @@ public class IndexControllerTest {
     @Test
     public void getIndexPage() {
         Set<Recipe> recipes = prepareSet();
-        when(recipeService.prepareRecipeSet()).thenReturn(recipes);
-
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
+        when(recipeService.prepareRecipeSet()).thenReturn(recipes);
         assertEquals(indexController.getIndexPage(model), IndexController.INDEX.substring(1));
 
-        verify(recipeService, times(1)).prepareRecipeSet();
-        verify(model, times(1))
-                .addAttribute(eq(IndexController.ATTRIBUTE), argumentCaptor.capture());
+        verify(recipeService).prepareRecipeSet();
+        verify(model).addAttribute(eq(IndexController.ATTRIBUTE), argumentCaptor.capture());
 
-        Set<Recipe> controllerSet = argumentCaptor.getValue();
-        assertEquals(controllerSet.size(), 2);
+        assertEquals(argumentCaptor.getValue().size(), 2);
     }
 }

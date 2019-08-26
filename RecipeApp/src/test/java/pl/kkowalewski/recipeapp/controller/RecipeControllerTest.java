@@ -6,10 +6,16 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.service.RecipeService;
 
-import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeControllerTest {
@@ -19,13 +25,16 @@ public class RecipeControllerTest {
 
     @Mock
     private RecipeService recipeService;
+
     @InjectMocks
     private RecipeController recipeController;
+
+    private MockMvc mockMvc;
 
     /*------------------------ METHODS REGION ------------------------*/
     @Before
     public void setUp() {
-        //recipeController = new RecipeController(recipeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
     }
 
     private Recipe prepareRecipe() {
@@ -33,8 +42,12 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void showById() {
+    public void showById() throws Exception {
+        when(recipeService.findById(anyLong())).thenReturn(prepareRecipe());
 
+        mockMvc.perform(get(RecipeController.RECIPE_SHOW + "/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(RecipeController.RECIPE_SHOW.substring(1)));
     }
 }
     
