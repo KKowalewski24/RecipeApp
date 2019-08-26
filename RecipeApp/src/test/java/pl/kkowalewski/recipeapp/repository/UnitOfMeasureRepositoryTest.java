@@ -17,7 +17,7 @@ public class UnitOfMeasureRepositoryTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
     @Autowired
-    UnitOfMeasureRepository unitOfMeasureRepository;
+    private UnitOfMeasureRepository unitOfMeasureRepository;
 
     /*------------------------ METHODS REGION ------------------------*/
     @Test
