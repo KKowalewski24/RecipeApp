@@ -6,23 +6,14 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Data
 @Entity
 public class Recipe {
 
+    /*------------------------ FIELDS REGION ------------------------*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String description;
-    private Integer prepTime;
-    private Integer cookTime;
-    private Integer servings;
-    private String source;
-    private String url;
 
     @Lob
     private String directions;
@@ -45,17 +36,14 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this);
-    }
+    private String description;
+    private Integer prepTime;
+    private Integer cookTime;
+    private Integer servings;
+    private String source;
+    private String url;
 
-    public Recipe addIngredient(Ingredient ingredient) {
-        ingredient.setRecipe(this);
-        this.ingredients.add(ingredient);
-        return this;
-    }
-
+    /*------------------------ METHODS REGION ------------------------*/
     public Recipe() {
     }
 
@@ -64,9 +52,8 @@ public class Recipe {
     }
 
     public Recipe(Long id, String description, String direction, Integer preparationTime,
-                  Integer cockTime,
-                  Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
-                  Set<Category> categories) {
+                  Integer cockTime, Notes notes, Difficulty difficulty,
+                  Set<Ingredient> ingredients, Set<Category> categories) {
         this.id = id;
         this.description = description;
         this.directions = direction;

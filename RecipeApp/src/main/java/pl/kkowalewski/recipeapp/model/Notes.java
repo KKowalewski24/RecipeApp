@@ -5,14 +5,12 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Data
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
+    /*------------------------ FIELDS REGION ------------------------*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +21,7 @@ public class Notes {
     @Lob
     private String recipeNotes;
 
+    /*------------------------ METHODS REGION ------------------------*/
     public Notes() {
     }
 
