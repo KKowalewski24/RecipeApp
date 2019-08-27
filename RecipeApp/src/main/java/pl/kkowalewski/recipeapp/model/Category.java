@@ -1,13 +1,13 @@
 package pl.kkowalewski.recipeapp.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(exclude = {"recipes"})
 @Entity
 public class Category {
 
@@ -23,4 +23,27 @@ public class Category {
 
     /*------------------------ METHODS REGION ------------------------*/
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        return new EqualsBuilder()
+                .append(id, category.id)
+                .append(description, category.description)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(description)
+                .toHashCode();
+    }
 }
