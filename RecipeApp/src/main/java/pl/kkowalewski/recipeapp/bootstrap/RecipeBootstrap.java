@@ -18,6 +18,9 @@ import java.util.*;
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     /*------------------------ FIELDS REGION ------------------------*/
+    public static final Long RECIPE_ID_ONE = 1L;
+    public static final Long RECIPE_ID_TWO = 2L;
+
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
@@ -164,7 +167,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         mexicanCategory = checkCategory("Mexican").get();
 
         /*------------------------ GUACAMOLE------------------------*/
-        guacamoleRecipe = new Recipe(
+        guacamoleRecipe = new Recipe(RECIPE_ID_ONE,
                 guacamoleRecipeBundle.getObject("_description").toString(),
                 guacamoleRecipeBundle.getObject("_directions").toString(),
                 Integer.parseInt(guacamoleRecipeBundle.getObject("_prepTime").toString()),
@@ -177,7 +180,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleNotes = guacamoleRecipe.getNotes();
 
         /*------------------------ TACOS ------------------------*/
-        tacosRecipe = new Recipe(
+        tacosRecipe = new Recipe(RECIPE_ID_TWO,
                 tacosRecipeBundle.getObject("_description").toString(),
                 tacosRecipeBundle.getObject("_directions").toString(),
                 Integer.parseInt(tacosRecipeBundle.getObject("_prepTime").toString()),

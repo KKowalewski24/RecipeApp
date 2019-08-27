@@ -82,9 +82,11 @@ public class Recipe {
         this.id = id;
     }
 
-    public Recipe(String description, String direction, Integer preparationTime, Integer cockTime,
+    public Recipe(Long id, String description, String direction, Integer preparationTime,
+                  Integer cockTime,
                   Notes notes, Difficulty difficulty, Set<Ingredient> ingredients,
                   Set<Category> categories) {
+        this.id = id;
         this.description = description;
         this.direction = direction;
         this.preparationTime = preparationTime;
