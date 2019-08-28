@@ -1,13 +1,13 @@
 package pl.kkowalewski.recipeapp.model;
 
 import lombok.Data;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -40,33 +40,5 @@ public class Ingredient {
         this.amount = amount;
         this.unit = unit;
         this.recipe = recipe;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Ingredient that = (Ingredient) o;
-
-        return new EqualsBuilder()
-                .append(id, that.id)
-                .append(unit, that.unit)
-                .append(description, that.description)
-                .append(amount, that.amount)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(id)
-                .append(unit)
-                .append(description)
-                .append(amount)
-                .toHashCode();
     }
 }
