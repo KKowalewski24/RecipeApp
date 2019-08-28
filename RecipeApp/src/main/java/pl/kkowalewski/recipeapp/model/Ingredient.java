@@ -41,4 +41,10 @@ public class Ingredient {
         this.unit = unit;
         this.recipe = recipe;
     }
+
+    public Ingredient(Long id, String description, BigDecimal amount, UnitOfMeasure unit) {
+        this.unit = unit;
+        this.description = description;
+        this.amount = amount;
+    }
 }

@@ -19,5 +19,11 @@ public class UnitOfMeasure {
     private String description;
 
     /*------------------------ METHODS REGION ------------------------*/
+    public UnitOfMeasure() {
+    }
 
+    public UnitOfMeasure(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
 }

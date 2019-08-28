@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
+import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 
@@ -32,10 +34,17 @@ public class RecipeServiceImplTest {
     @Mock
     private RecipeRepository recipeRepository;
 
+    @Mock
+    private RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    private RecipeCommandToRecipe recipeCommandToRecipe;
+
     /*------------------------ METHODS REGION ------------------------*/
     @Before
     public void setUp() {
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository,
+                recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     private Recipe prepareRecipe() {

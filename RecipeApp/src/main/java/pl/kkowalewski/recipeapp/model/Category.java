@@ -22,5 +22,11 @@ public class Category {
     private String description;
 
     /*------------------------ METHODS REGION ------------------------*/
+    public Category() {
+    }
 
+    public Category(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
 }

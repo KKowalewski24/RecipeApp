@@ -64,4 +64,19 @@ public class Recipe {
         this.ingredients = ingredients;
         this.categories = categories;
     }
+
+    public Recipe(Long id, Integer cookTime, Integer prepTime, String description,
+                  Difficulty difficulty, String directions, Integer servings,
+                  String source, String url, Notes notes) {
+        this.id = id;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.description = description;
+        this.difficulty = difficulty;
+        this.directions = directions;
+        this.servings = servings;
+        this.source = source;
+        this.url = url;
+        this.notes = notes;
+    }
 }

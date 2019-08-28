@@ -1,6 +1,10 @@
 package pl.kkowalewski.recipeapp.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.kkowalewski.recipeapp.command.RecipeCommand;
+import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
+import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
 import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
@@ -14,10 +18,16 @@ public class RecipeServiceImpl implements RecipeService {
 
     /*------------------------ FIELDS REGION ------------------------*/
     private final RecipeRepository recipeRepository;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository,
+                             RecipeCommandToRecipe recipeCommandToRecipe,
+                             RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
     @Override
@@ -37,5 +47,14 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         return recipeOptional.get();
+    }
+
+    @Transactional
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        Recipe recipe = recipeCommandToRecipe.convert(recipeCommand);
+        Recipe savedRecipe = recipeRepository.save(recipe);
+
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 }
