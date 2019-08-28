@@ -1,7 +1,5 @@
 package pl.kkowalewski.recipeapp.bundle;
 
-import pl.kkowalewski.recipeapp.model.Difficulty;
-
 import java.util.ListResourceBundle;
 
 public class TacosRecipe extends ListResourceBundle {

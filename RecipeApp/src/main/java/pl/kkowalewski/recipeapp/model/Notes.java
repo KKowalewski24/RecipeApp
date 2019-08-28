@@ -2,8 +2,6 @@ package pl.kkowalewski.recipeapp.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 

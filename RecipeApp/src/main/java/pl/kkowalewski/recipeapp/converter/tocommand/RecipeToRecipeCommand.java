@@ -6,7 +6,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.converter.Command;
-import pl.kkowalewski.recipeapp.model.Category;
 import pl.kkowalewski.recipeapp.model.Recipe;
 
 @Component

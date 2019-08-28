@@ -29,7 +29,8 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
             return null;
         }
 
-        return new Ingredient(ingredientCommand.getId(),ingredientCommand.getDescription(), ingredientCommand.getAmount(),
+        return new Ingredient(ingredientCommand.getId(), ingredientCommand.getDescription(),
+                ingredientCommand.getAmount(),
                 unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUnitOfMeasure()));
     }
 }
