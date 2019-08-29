@@ -30,6 +30,9 @@ public class RecipeCommand {
     private Set<CategoryCommand> categories = new HashSet<>();
 
     /*------------------------ METHODS REGION ------------------------*/
+    public RecipeCommand(Long id) {
+        this.id = id;
+    }
 
     public RecipeCommand(Long id, Integer prepTime, Integer cookTime, String description,
                          Difficulty difficulty, String directions, Integer servings,

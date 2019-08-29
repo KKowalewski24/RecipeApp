@@ -13,10 +13,17 @@ import pl.kkowalewski.recipeapp.service.RecipeService;
 public class RecipeController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String RECIPE_SHOW = "/recipe/show";
-    public static final String RECIPE_NEW = "recipe/new";
-    public static final String RECIPE_RECIPE_FORM = "recipe/recipeform";
-    public static final String ATTRIBUTE = "recipe";
+    public static final String RECIPE = "recipe";
+    public static final String RECIPE_FORM = "recipeform";
+    public static final String SHOW = "show";
+    public static final String NEW = "new";
+    public static final String UPDATE = "update";
+    public static final String REDIRECT = "redirect:/";
+
+    public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
+    public static final String RECIPE_NEW = RECIPE + "/" + NEW;
+    public static final String RECIPE_UPDATE = RECIPE + "/{id}/" + UPDATE;
+    public static final String RECIPE_RECIPE_FORM = RECIPE + "/" + RECIPE_FORM;
 
     private final RecipeService recipeService;
 
@@ -25,23 +32,31 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping(RECIPE_SHOW + "/{id}")
+    @RequestMapping(RECIPE_SHOW)
     public String showById(@PathVariable String id, Model model) {
-        model.addAttribute(ATTRIBUTE, recipeService.findById(Long.valueOf(id)));
+        model.addAttribute(RECIPE, recipeService.findById(Long.valueOf(id)));
 
-        return RECIPE_SHOW.substring(1);
+        return RECIPE + "/" + SHOW;
     }
 
     @RequestMapping(RECIPE_NEW)
     public String newRecipe(Model model) {
-        model.addAttribute(ATTRIBUTE, new RecipeCommand());
+        model.addAttribute(RECIPE, new RecipeCommand());
+
+        return RECIPE_RECIPE_FORM;
+    }
+
+    @RequestMapping(RECIPE_UPDATE)
+    public String updateRecipe(@PathVariable String id, Model model) {
+        model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(id)));
 
         return RECIPE_RECIPE_FORM;
     }
 
     @PostMapping
-    @RequestMapping(ATTRIBUTE)
+    @RequestMapping(RECIPE)
     public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
-        return "redirect:" + RECIPE_SHOW + "/" + recipeService.saveRecipeCommand(recipeCommand).getId();
+        return REDIRECT + RECIPE + "/"
+                + recipeService.saveRecipeCommand(recipeCommand).getId() + "/" + SHOW;
     }
 }
