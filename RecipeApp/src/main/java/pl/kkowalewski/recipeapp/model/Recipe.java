@@ -53,8 +53,7 @@ public class Recipe {
 
     public Recipe(Long id, String description, String direction, Integer preparationTime,
                   Integer cockTime, Notes notes, Difficulty difficulty, Integer servings,
-                  String source, String url,
-                  Set<Ingredient> ingredients, Set<Category> categories) {
+                  String source, String url, Set<Category> categories) {
         this.id = id;
         this.description = description;
         this.directions = direction;
@@ -65,7 +64,6 @@ public class Recipe {
         this.servings = servings;
         this.source = source;
         this.url = url;
-        this.ingredients = ingredients;
         this.categories = categories;
     }
 
