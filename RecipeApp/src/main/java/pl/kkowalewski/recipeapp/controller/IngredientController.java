@@ -13,6 +13,7 @@ public class IngredientController {
     /*------------------------ FIELDS REGION ------------------------*/
     public static final String RECIPE = "recipe";
     public static final String INGREDIENTS = "ingredients";
+    public static final String INGREDIENT = "ingredient";
     public static final String LIST = "list";
 
     public static final String LIST_INGREDIENTS = "/" + RECIPE + "/{id}/" + INGREDIENTS;
@@ -29,6 +30,6 @@ public class IngredientController {
     public String listIngredients(@PathVariable String id, Model model) {
         model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(id)));
 
-        return RECIPE + "/" + INGREDIENTS + "/" + LIST;
+        return RECIPE + "/" + INGREDIENT + "/" + LIST;
     }
 }

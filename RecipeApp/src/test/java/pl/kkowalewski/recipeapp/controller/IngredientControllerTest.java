@@ -50,7 +50,7 @@ public class IngredientControllerTest {
         mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/" + IngredientController.INGREDIENTS))
                 .andExpect(status().isOk())
                 .andExpect(view().name(IngredientController.RECIPE
-                        + "/" + IngredientController.INGREDIENTS
+                        + "/" + IngredientController.INGREDIENT
                         + "/" + IngredientController.LIST))
                 .andExpect(model().attributeExists(IngredientController.RECIPE));
 
