@@ -15,6 +15,7 @@ import pl.kkowalewski.recipeapp.service.RecipeService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -89,6 +90,15 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name(RecipeController.RECIPE_RECIPE_FORM))
                 .andExpect(model().attributeExists(RecipeController.RECIPE));
+    }
+
+    @Test
+    public void deleteByIdTest() throws Exception {
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.DELETE))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name(RecipeController.REDIRECT));
+
+        verify(recipeService).deleteById(anyLong());
     }
 }
     

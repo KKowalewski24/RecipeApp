@@ -58,7 +58,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void prepareRecipeSet() {
+    public void prepareRecipeSetTest() {
         Set<Recipe> recipesData = new HashSet<>(Arrays.asList(prepareRecipe()));
         when(recipeService.prepareRecipeSet()).thenReturn(recipesData);
         Set<Recipe> recipes = recipeService.prepareRecipeSet();
@@ -89,5 +89,11 @@ public class RecipeServiceImplTest {
         assertNotNull(recipeCommand);
         verify(recipeRepository).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void deleteByIdTest() {
+        recipeService.deleteById(RECIPE_ID);
+        verify(recipeRepository).deleteById(anyLong());
     }
 }

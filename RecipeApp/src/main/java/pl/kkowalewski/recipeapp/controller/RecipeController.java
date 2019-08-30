@@ -2,10 +2,7 @@ package pl.kkowalewski.recipeapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.service.RecipeService;
 
@@ -19,11 +16,13 @@ public class RecipeController {
     public static final String NEW = "new";
     public static final String UPDATE = "update";
     public static final String REDIRECT = "redirect:/";
+    public static final String DELETE = "delete";
 
     public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
     public static final String RECIPE_NEW = RECIPE + "/" + NEW;
     public static final String RECIPE_UPDATE = RECIPE + "/{id}/" + UPDATE;
     public static final String RECIPE_RECIPE_FORM = RECIPE + "/" + RECIPE_FORM;
+    public static final String RECIPE_DELETE = RECIPE + "/{id}/" + DELETE;
 
     private final RecipeService recipeService;
 
@@ -32,6 +31,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping
     @RequestMapping(RECIPE_SHOW)
     public String showById(@PathVariable String id, Model model) {
         model.addAttribute(RECIPE, recipeService.findById(Long.valueOf(id)));
@@ -39,6 +39,7 @@ public class RecipeController {
         return RECIPE + "/" + SHOW;
     }
 
+    @GetMapping
     @RequestMapping(RECIPE_NEW)
     public String newRecipe(Model model) {
         model.addAttribute(RECIPE, new RecipeCommand());
@@ -46,6 +47,7 @@ public class RecipeController {
         return RECIPE_RECIPE_FORM;
     }
 
+    @GetMapping
     @RequestMapping(RECIPE_UPDATE)
     public String updateRecipe(@PathVariable String id, Model model) {
         model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(id)));
@@ -58,5 +60,13 @@ public class RecipeController {
     public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
         return REDIRECT + RECIPE + "/"
                 + recipeService.saveRecipeCommand(recipeCommand).getId() + "/" + SHOW;
+    }
+
+    @GetMapping
+    @RequestMapping(RECIPE_DELETE)
+    public String deleteById(@PathVariable String id) {
+        recipeService.deleteById(Long.valueOf(id));
+
+        return REDIRECT;
     }
 }
