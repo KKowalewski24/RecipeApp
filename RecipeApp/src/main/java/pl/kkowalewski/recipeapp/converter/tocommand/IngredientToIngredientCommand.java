@@ -30,6 +30,6 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
         }
 
         return new IngredientCommand(ingredient.getId(), ingredient.getDescription(),
-                ingredient.getAmount(), unitConverter.convert(ingredient.getUnit()));
+                ingredient.getAmount(), unitConverter.convert(ingredient.getUom()));
     }
 }

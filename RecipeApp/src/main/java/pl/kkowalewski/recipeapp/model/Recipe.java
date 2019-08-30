@@ -15,6 +15,13 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String description;
+    private Integer prepTime;
+    private Integer cookTime;
+    private Integer servings;
+    private String source;
+    private String url;
+
     @Lob
     private String directions;
 
@@ -36,13 +43,6 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    private String description;
-    private Integer prepTime;
-    private Integer cookTime;
-    private Integer servings;
-    private String source;
-    private String url;
-
     /*------------------------ METHODS REGION ------------------------*/
     public Recipe() {
     }
@@ -52,7 +52,8 @@ public class Recipe {
     }
 
     public Recipe(Long id, String description, String direction, Integer preparationTime,
-                  Integer cockTime, Notes notes, Difficulty difficulty,
+                  Integer cockTime, Notes notes, Difficulty difficulty, Integer servings,
+                  String source, String url,
                   Set<Ingredient> ingredients, Set<Category> categories) {
         this.id = id;
         this.description = description;
@@ -61,6 +62,9 @@ public class Recipe {
         this.cookTime = cockTime;
         this.notes = notes;
         this.difficulty = difficulty;
+        this.servings = servings;
+        this.source = source;
+        this.url = url;
         this.ingredients = ingredients;
         this.categories = categories;
     }
@@ -78,5 +82,11 @@ public class Recipe {
         this.source = source;
         this.url = url;
         this.notes = notes;
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
 }
