@@ -20,11 +20,11 @@
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
   </head>
   <body>
-    <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
+    <!--/*@thymesVar id="recipe" type="pl.kkowalewski.recipeapp.model.Recipe"*/-->
     <div class="container-fluid" style="margin-top: 20px">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+          <form th:object="${recipe}" th:action="@{/recipe/}">
             <input type="hidden" th:field="*{id}"/>
             <div class="pannel-group">
               <div class="panel panel-primary">
@@ -98,7 +98,7 @@
                       <h1 class="panel-title">Ingredients</h1>
                     </div>
                     <div class="col-md-1">
-                      <a class="btn btn-default" href="#" role="button">Edit</a>
+                      <a class="btn btn-default" href="#" role="button">View</a>
                     </div>
                   </div>
                 </div>
@@ -108,10 +108,10 @@
                       <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
                         <li th:remove="all">1 Cup of milk</li>
                         <li th:remove="all">1 Teaspoon of chocolate</li>
-                        <li>asdf</li>
+                        <li th:remove="all">asdf</li>
                         <li th:each="ingredient : ${recipe.ingredients}"
                             th:text="${(ingredient.getAmount() +
-                                        ' ' + ingredient.getUnitOfMeasure().getDescription() +
+                                        ' ' + ingredient.unit.getDescription() +
                                         ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
                         </li>
                       </ul>

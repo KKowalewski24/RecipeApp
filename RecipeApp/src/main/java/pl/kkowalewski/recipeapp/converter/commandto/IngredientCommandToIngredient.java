@@ -31,6 +31,6 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 
         return new Ingredient(ingredientCommand.getId(), ingredientCommand.getDescription(),
                 ingredientCommand.getAmount(),
-                unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUnitOfMeasure()));
+                unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUom()));
     }
 }
