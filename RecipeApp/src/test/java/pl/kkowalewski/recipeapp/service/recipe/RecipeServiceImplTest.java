@@ -1,4 +1,4 @@
-package pl.kkowalewski.recipeapp.service;
+package pl.kkowalewski.recipeapp.service.recipe;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,8 @@ import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
 import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeServiceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
-import pl.kkowalewski.recipeapp.service.RecipeService;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 @Controller
 public class RecipeController {

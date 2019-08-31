@@ -1,4 +1,4 @@
-package pl.kkowalewski.recipeapp.service;
+package pl.kkowalewski.recipeapp.service.recipe;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

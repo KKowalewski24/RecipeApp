@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import pl.kkowalewski.recipeapp.model.Recipe;
-import pl.kkowalewski.recipeapp.service.RecipeService;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import java.util.Arrays;
 import java.util.HashSet;

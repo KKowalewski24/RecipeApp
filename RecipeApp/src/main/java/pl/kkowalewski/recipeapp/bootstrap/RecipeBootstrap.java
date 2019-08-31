@@ -94,11 +94,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 new BigDecimal(".5"), teapoonUom, guacamoleRecipe));
         guacamoleRecipe.addIngredient(new Ingredient("fresh lime juice or lemon juice",
                 new BigDecimal(2), tableSpoonUom, guacamoleRecipe));
-        guacamoleRecipe.addIngredient(new Ingredient("minced red onion or thinly sliced green " +
-                "onion",
+        guacamoleRecipe.addIngredient(new Ingredient(
+                "minced red onion or thinly sliced green onion",
                 new BigDecimal(2), tableSpoonUom, guacamoleRecipe));
-        guacamoleRecipe.addIngredient(new Ingredient("serrano chiles, stems and seeds removed, " +
-                "minced",
+        guacamoleRecipe.addIngredient(new Ingredient(
+                "serrano chiles, stems and seeds removed, minced",
                 new BigDecimal(2), eachUom, guacamoleRecipe));
         guacamoleRecipe.addIngredient(new Ingredient("Cilantro",
                 new BigDecimal(2), tableSpoonUom, guacamoleRecipe));

@@ -8,8 +8,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import pl.kkowalewski.recipeapp.command.IngredientCommand;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
-import pl.kkowalewski.recipeapp.service.RecipeService;
+import pl.kkowalewski.recipeapp.service.ingredient.IngredientService;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -24,9 +26,13 @@ public class IngredientControllerTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
     private static final Long RECIPE_ID = 1L;
+    private static final Long INGREDIENT_ID = 2L;
 
     @Mock
     private RecipeService recipeService;
+
+    @Mock
+    private IngredientService ingredientService;
 
     @InjectMocks
     private IngredientController ingredientController;
@@ -43,6 +49,10 @@ public class IngredientControllerTest {
         return new RecipeCommand(RECIPE_ID);
     }
 
+    private IngredientCommand prepareIngredientCommand() {
+        return new IngredientCommand(INGREDIENT_ID);
+    }
+
     @Test
     public void listIngredientsTest() throws Exception {
         when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand());
@@ -55,6 +65,19 @@ public class IngredientControllerTest {
                 .andExpect(model().attributeExists(IngredientController.RECIPE));
 
         verify(recipeService).findCommandById(anyLong());
+    }
+
+    @Test
+    public void showRecipeIngredientTest() throws Exception {
+        when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong()))
+                .thenReturn(prepareIngredientCommand());
+
+        mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"
+                + IngredientController.INGREDIENT + "/2/" + IngredientController.SHOW))
+                .andExpect(status().isOk())
+                .andExpect(view().name(IngredientController.RECIPE + "/"
+                        + IngredientController.INGREDIENT + "/" + IngredientController.SHOW))
+                .andExpect(model().attributeExists(IngredientController.INGREDIENT));
     }
 }
     

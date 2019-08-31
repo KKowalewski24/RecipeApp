@@ -1,4 +1,4 @@
-package pl.kkowalewski.recipeapp.service;
+package pl.kkowalewski.recipeapp.service.recipe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +11,7 @@ import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
 import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
+import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import static org.junit.Assert.assertEquals;
 

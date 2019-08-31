@@ -29,6 +29,10 @@ public class Ingredient {
     public Ingredient() {
     }
 
+    public Ingredient(Long id) {
+        this.id = id;
+    }
+
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
         this.amount = amount;

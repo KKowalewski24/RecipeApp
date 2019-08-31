@@ -1,4 +1,4 @@
-package pl.kkowalewski.recipeapp.service;
+package pl.kkowalewski.recipeapp.service.recipe;
 
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.model.Recipe;
