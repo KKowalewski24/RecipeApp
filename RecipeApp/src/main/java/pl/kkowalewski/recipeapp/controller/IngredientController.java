@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kkowalewski.recipeapp.command.IngredientCommand;
+import pl.kkowalewski.recipeapp.command.UnitOfMeasureCommand;
 import pl.kkowalewski.recipeapp.service.ingredient.IngredientService;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 import pl.kkowalewski.recipeapp.service.unitofmeasure.UnitOfMeasureService;
@@ -24,6 +25,7 @@ public class IngredientController {
     public static final String INGREDIENT_FORM = "ingredientform";
     public static final String UPDATE = "update";
     public static final String REDIRECT = "redirect:/";
+    public static final String NEW = "new";
 
     public static final String LIST_INGREDIENTS = "/" + RECIPE + "/{recipeId}/" + INGREDIENTS;
     public static final String SHOW_RECIPE_INGREDIENT =
@@ -31,6 +33,7 @@ public class IngredientController {
     public static final String UPDATE_RECIPE_INGREDIENT =
             RECIPE + "/{recipeId}/" + INGREDIENT + "/{id}/" + UPDATE;
     public static final String SAVE_UPDATE = RECIPE + "/{recipeId}/" + INGREDIENT;
+    public static final String NEW_RECIPE = RECIPE + "/{recipeId}/" + INGREDIENT + "/" + NEW;
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
@@ -60,6 +63,19 @@ public class IngredientController {
                 .findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
 
         return RECIPE + "/" + INGREDIENT + "/" + SHOW;
+    }
+
+    @GetMapping
+    @RequestMapping(NEW_RECIPE)
+    public String newRecipe(@PathVariable String recipeId, Model model) {
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute(INGREDIENT, ingredientCommand);
+
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute(UOM_LIST, unitOfMeasureService.listAllUoms());
+
+        return RECIPE + "/" + INGREDIENT + "/" + INGREDIENT_FORM;
     }
 
     @GetMapping

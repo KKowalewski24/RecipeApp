@@ -19,6 +19,7 @@ import java.util.HashSet;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -93,6 +94,21 @@ public class IngredientControllerTest {
                 .andExpect(view().name(IngredientController.RECIPE + "/"
                         + IngredientController.INGREDIENT + "/" + IngredientController.SHOW))
                 .andExpect(model().attributeExists(IngredientController.INGREDIENT));
+    }
+
+    @Test
+    public void newRecipeTest() throws Exception {
+        lenient().when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand());
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+
+        mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"
+                + IngredientController.INGREDIENT + "/" + IngredientController.NEW))
+                .andExpect(status().isOk())
+                .andExpect(view().name(IngredientController.RECIPE + "/"
+                        + IngredientController.INGREDIENT + "/" + IngredientController.INGREDIENT_FORM))
+                .andExpect(model().attributeExists(IngredientController.INGREDIENT))
+                .andExpect(model().attributeExists(IngredientController.UOM_LIST));
+
     }
 
     @Test
