@@ -11,7 +11,6 @@ import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
 import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
-import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import static org.junit.Assert.assertEquals;
 
