@@ -8,7 +8,7 @@ import pl.kkowalewski.recipeapp.bundle.GuacamoleRecipe;
 import pl.kkowalewski.recipeapp.bundle.TacosNotes;
 import pl.kkowalewski.recipeapp.bundle.TacosRecipe;
 import pl.kkowalewski.recipeapp.exception.CategoryException;
-import pl.kkowalewski.recipeapp.exception.UnitsException;
+import pl.kkowalewski.recipeapp.exception.UnitOfMeasureNotFoundException;
 import pl.kkowalewski.recipeapp.model.*;
 import pl.kkowalewski.recipeapp.repository.CategoryRepository;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
@@ -61,7 +61,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Optional<UnitOfMeasure> unit = unitOfMeasureRepository.findByDescription(description);
 
         if (!unit.isPresent()) {
-            throw new UnitsException();
+            throw new UnitOfMeasureNotFoundException();
         }
 
         return unit;

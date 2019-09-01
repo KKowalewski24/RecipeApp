@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import pl.kkowalewski.recipeapp.command.IngredientCommand;
 import pl.kkowalewski.recipeapp.converter.Command;
 import pl.kkowalewski.recipeapp.model.Ingredient;
+import pl.kkowalewski.recipeapp.model.Recipe;
 
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient>,
@@ -29,8 +30,16 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
             return null;
         }
 
-        return new Ingredient(ingredientCommand.getId(), ingredientCommand.getDescription(),
+        Recipe recipe = new Recipe(ingredientCommand.getRecipeId());
+
+        Ingredient ingredient = new Ingredient(ingredientCommand.getId(),
+                ingredientCommand.getDescription(),
                 ingredientCommand.getAmount(),
-                unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUom()));
+                unitOfMeasureCommandToUnitOfMeasure.convert(ingredientCommand.getUom()),
+                recipe);
+
+        recipe.addIngredient(ingredient);
+
+        return ingredient;
     }
 }

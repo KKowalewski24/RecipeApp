@@ -25,6 +25,11 @@ public class IngredientCommand {
         this.id = id;
     }
 
+    public IngredientCommand(Long id, Long recipeId) {
+        this.id = id;
+        this.recipeId = recipeId;
+    }
+
     public IngredientCommand(Long id, String description, BigDecimal amount,
                              UnitOfMeasureCommand uom) {
         this.id = id;

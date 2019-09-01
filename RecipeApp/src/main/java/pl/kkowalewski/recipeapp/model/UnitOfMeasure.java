@@ -22,6 +22,11 @@ public class UnitOfMeasure {
     public UnitOfMeasure() {
     }
 
+    public UnitOfMeasure(Long id) {
+        this.id = id;
+
+    }
+
     public UnitOfMeasure(Long id, String description) {
         this.id = id;
         this.description = description;
