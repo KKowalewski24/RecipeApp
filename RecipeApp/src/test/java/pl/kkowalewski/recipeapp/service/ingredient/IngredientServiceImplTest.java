@@ -62,12 +62,19 @@ public class IngredientServiceImplTest {
         return new Recipe(id);
     }
 
+    private IngredientCommand prepareIngredientCommand(Long id, Long recipeId) {
+        return new IngredientCommand(id, recipeId);
+    }
+
     private Ingredient prepareIngredient(Long id) {
         return new Ingredient(id);
     }
 
-    private IngredientCommand prepareIngredientCommand(Long id, Long recipeId) {
-        return new IngredientCommand(id, recipeId);
+    private Ingredient prepareIngredient(Long id, Recipe recipe) {
+        Ingredient ingredient = new Ingredient(id);
+        ingredient.setRecipe(recipe);
+
+        return ingredient;
     }
 
     @Test
@@ -101,6 +108,19 @@ public class IngredientServiceImplTest {
 
         assertEquals(Long.valueOf(ING_THREE_ID), ingredientService.saveIngredientCommand(
                 prepareIngredientCommand(ING_THREE_ID, RECIPE_ID)).getId());
+        verify(recipeRepository).findById(anyLong());
+        verify(recipeRepository).save(any(Recipe.class));
+    }
+
+    @Test
+    public void deleteByIdTest() {
+        Recipe recipe = prepareRecipe(RECIPE_ID);
+        recipe.addIngredient(prepareIngredient(ING_THREE_ID, recipe));
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        ingredientService.deleteById(RECIPE_ID, ING_THREE_ID);
         verify(recipeRepository).findById(anyLong());
         verify(recipeRepository).save(any(Recipe.class));
     }

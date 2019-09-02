@@ -142,5 +142,16 @@ public class IngredientControllerTest {
                         IngredientController.RECIPE + "/1/" + IngredientController.INGREDIENT
                         + "/3/" + IngredientController.SHOW));
     }
+
+    @Test
+    public void deleteIngredientTest() throws Exception {
+        mockMvc.perform(get("/" + IngredientController.RECIPE + "/2/"
+                + IngredientController.INGREDIENT + "/3/" + IngredientController.DELETE))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name(IngredientController.REDIRECT
+                        + IngredientController.RECIPE + "/2/" + IngredientController.INGREDIENTS));
+
+        verify(ingredientService).deleteById(anyLong(), anyLong());
+    }
 }
     

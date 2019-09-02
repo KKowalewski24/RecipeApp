@@ -1,9 +1,11 @@
 package pl.kkowalewski.recipeapp.service.ingredient;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.kkowalewski.recipeapp.command.IngredientCommand;
 import pl.kkowalewski.recipeapp.converter.commandto.IngredientCommandToIngredient;
 import pl.kkowalewski.recipeapp.converter.tocommand.IngredientToIngredientCommand;
+import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 import pl.kkowalewski.recipeapp.exception.UnitOfMeasureNotFoundException;
 import pl.kkowalewski.recipeapp.model.Ingredient;
 import pl.kkowalewski.recipeapp.model.Recipe;
@@ -45,6 +47,7 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredientCommandOptional.get();
     }
 
+    @Transactional
     @Override
     public IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand) {
         Optional<Recipe> recipeOptional =
@@ -91,5 +94,26 @@ public class IngredientServiceImpl implements IngredientService {
         }
 
         return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+    }
+
+    @Override
+    public void deleteById(Long recipeId, Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isPresent()) {
+            Recipe recipe = recipeOptional.get();
+
+            Optional<Ingredient> ingredientOptional = recipe.getIngredients().stream()
+                    .filter(ingredient -> ingredient.getId().equals(id)).findFirst();
+
+            if (ingredientOptional.isPresent()) {
+                Ingredient ingredient = ingredientOptional.get();
+                ingredient.setRecipe(null);
+                recipe.getIngredients().remove(ingredientOptional.get());
+                recipeRepository.save(recipe);
+            }
+        } else {
+            throw new RecipeNotFoundException();
+        }
     }
 }

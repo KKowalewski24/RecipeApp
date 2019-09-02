@@ -26,14 +26,18 @@ public class IngredientController {
     public static final String UPDATE = "update";
     public static final String REDIRECT = "redirect:/";
     public static final String NEW = "new";
+    public static final String DELETE = "delete";
 
+    /*----- REQUEST MAPPINGS -----*/
     public static final String LIST_INGREDIENTS = "/" + RECIPE + "/{recipeId}/" + INGREDIENTS;
-    public static final String SHOW_RECIPE_INGREDIENT =
-            RECIPE + "/{recipeId}/" + INGREDIENT + "/{id}/" + SHOW;
-    public static final String UPDATE_RECIPE_INGREDIENT =
-            RECIPE + "/{recipeId}/" + INGREDIENT + "/{id}/" + UPDATE;
+    public static final String SHOW_RECIPE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
+            + "/{id}/" + SHOW;
+    public static final String UPDATE_RECIPE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
+            + "/{id}/" + UPDATE;
     public static final String SAVE_UPDATE = RECIPE + "/{recipeId}/" + INGREDIENT;
     public static final String NEW_RECIPE = RECIPE + "/{recipeId}/" + INGREDIENT + "/" + NEW;
+    public static final String DELETE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
+            + "/{id}/" + DELETE;
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
@@ -97,5 +101,13 @@ public class IngredientController {
 
         return REDIRECT + RECIPE + "/" + command.getRecipeId() + "/"
                 + INGREDIENT + "/" + command.getId() + "/" + SHOW;
+    }
+
+    @GetMapping
+    @RequestMapping(DELETE_INGREDIENT)
+    public String deleteIngredient(@PathVariable String recipeId, @PathVariable String id) {
+        ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));
+
+        return REDIRECT + RECIPE + "/" + recipeId + "/" + INGREDIENTS;
     }
 }
