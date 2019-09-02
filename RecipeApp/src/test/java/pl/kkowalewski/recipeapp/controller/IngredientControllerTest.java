@@ -56,12 +56,12 @@ public class IngredientControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
     }
 
-    private RecipeCommand prepareRecipeCommand() {
-        return new RecipeCommand(RECIPE_ID);
+    private RecipeCommand prepareRecipeCommand(Long id) {
+        return new RecipeCommand(id);
     }
 
-    private IngredientCommand prepareIngredientCommand() {
-        return new IngredientCommand(INGREDIENT_ID);
+    private IngredientCommand prepareIngredientCommand(Long id) {
+        return new IngredientCommand(id);
     }
 
     private IngredientCommand prepareIngredientCommand(Long id, Long recipeId) {
@@ -70,7 +70,7 @@ public class IngredientControllerTest {
 
     @Test
     public void listIngredientsTest() throws Exception {
-        when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand());
+        when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand(RECIPE_ID));
 
         mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"
                 + IngredientController.INGREDIENTS))
@@ -86,7 +86,7 @@ public class IngredientControllerTest {
     @Test
     public void showRecipeIngredientTest() throws Exception {
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong()))
-                .thenReturn(prepareIngredientCommand());
+                .thenReturn(prepareIngredientCommand(INGREDIENT_ID));
 
         mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"
                 + IngredientController.INGREDIENT + "/2/" + IngredientController.SHOW))
@@ -98,7 +98,7 @@ public class IngredientControllerTest {
 
     @Test
     public void newRecipeTest() throws Exception {
-        lenient().when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand());
+        lenient().when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand(RECIPE_ID));
         when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
 
         mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"
@@ -114,7 +114,7 @@ public class IngredientControllerTest {
     @Test
     public void updateRecipeIngredientTest() throws Exception {
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong()))
-                .thenReturn(prepareIngredientCommand());
+                .thenReturn(prepareIngredientCommand(INGREDIENT_ID));
         when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
 
         mockMvc.perform(get("/" + IngredientController.RECIPE + "/1/"

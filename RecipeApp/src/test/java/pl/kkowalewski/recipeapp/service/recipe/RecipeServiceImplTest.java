@@ -49,17 +49,17 @@ public class RecipeServiceImplTest {
                 recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
-    private Recipe prepareRecipe() {
-        return new Recipe(RECIPE_ID);
+    private Recipe prepareRecipe(Long id) {
+        return new Recipe(id);
     }
 
-    private RecipeCommand prepareRecipeCommand() {
-        return new RecipeCommand(RECIPE_ID);
+    private RecipeCommand prepareRecipeCommand(Long id) {
+        return new RecipeCommand(id);
     }
 
     @Test
     public void prepareRecipeSetTest() {
-        Set<Recipe> recipesData = new HashSet<>(Arrays.asList(prepareRecipe()));
+        Set<Recipe> recipesData = new HashSet<>(Arrays.asList(prepareRecipe(RECIPE_ID)));
         when(recipeService.prepareRecipeSet()).thenReturn(recipesData);
         Set<Recipe> recipes = recipeService.prepareRecipeSet();
 
@@ -69,7 +69,7 @@ public class RecipeServiceImplTest {
 
     @Test
     public void findByIdTest() {
-        Optional<Recipe> recipeOptional = Optional.of(prepareRecipe());
+        Optional<Recipe> recipeOptional = Optional.of(prepareRecipe(RECIPE_ID));
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
         Recipe recipe = recipeService.findById(RECIPE_ID);
 
@@ -80,9 +80,9 @@ public class RecipeServiceImplTest {
 
     @Test
     public void findCommandByIdTest() {
-        Optional<Recipe> recipeOptional = Optional.of(prepareRecipe());
+        Optional<Recipe> recipeOptional = Optional.of(prepareRecipe(RECIPE_ID));
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
-        when(recipeToRecipeCommand.convert(any())).thenReturn(prepareRecipeCommand());
+        when(recipeToRecipeCommand.convert(any())).thenReturn(prepareRecipeCommand(RECIPE_ID));
 
         RecipeCommand recipeCommand = recipeService.findCommandById(RECIPE_ID);
 

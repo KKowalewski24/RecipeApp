@@ -43,17 +43,17 @@ public class RecipeControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
     }
 
-    private Recipe prepareRecipe() {
-        return new Recipe(RECIPE_ID);
+    private Recipe prepareRecipe(Long id) {
+        return new Recipe(id);
     }
 
-    private RecipeCommand prepareRecipeCommand() {
-        return new RecipeCommand(RECIPE_ID);
+    private RecipeCommand prepareRecipeCommand(Long id) {
+        return new RecipeCommand(id);
     }
 
     @Test
     public void showById() throws Exception {
-        when(recipeService.findById(anyLong())).thenReturn(prepareRecipe());
+        when(recipeService.findById(anyLong())).thenReturn(prepareRecipe(RECIPE_ID));
 
         mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.SHOW))
                 .andExpect(status().isOk())
@@ -71,7 +71,7 @@ public class RecipeControllerTest {
 
     @Test
     public void updateRecipeTest() throws Exception {
-        when(recipeService.saveRecipeCommand(any())).thenReturn(prepareRecipeCommand());
+        when(recipeService.saveRecipeCommand(any())).thenReturn(prepareRecipeCommand(RECIPE_ID));
 
         mockMvc.perform(post("/" + RecipeController.RECIPE)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -84,7 +84,7 @@ public class RecipeControllerTest {
 
     @Test
     public void saveOrUpdateTest() throws Exception {
-        when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand());
+        when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand(RECIPE_ID));
 
         mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.UPDATE))
                 .andExpect(status().isOk())
