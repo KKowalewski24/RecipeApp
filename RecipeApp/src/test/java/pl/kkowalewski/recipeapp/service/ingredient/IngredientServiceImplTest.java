@@ -10,6 +10,7 @@ import pl.kkowalewski.recipeapp.converter.commandto.IngredientCommandToIngredien
 import pl.kkowalewski.recipeapp.converter.commandto.UnitOfMeasureCommandToUnitOfMeasure;
 import pl.kkowalewski.recipeapp.converter.tocommand.IngredientToIngredientCommand;
 import pl.kkowalewski.recipeapp.converter.tocommand.UnitOfMeasureToUnitOfMeasureCommand;
+import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 import pl.kkowalewski.recipeapp.model.Ingredient;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
@@ -31,6 +32,7 @@ public class IngredientServiceImplTest {
     private static final Long ING_ONE_ID = 1L;
     private static final Long ING_TWO_ID = 2L;
     private static final Long ING_THREE_ID = 3L;
+    private static final Long WRONG_ID = -1L;
 
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
@@ -123,5 +125,10 @@ public class IngredientServiceImplTest {
         ingredientService.deleteById(RECIPE_ID, ING_THREE_ID);
         verify(recipeRepository).findById(anyLong());
         verify(recipeRepository).save(any(Recipe.class));
+    }
+
+    @Test(expected = RecipeNotFoundException.class)
+    public void deleteByIdExceptionTest() {
+        ingredientService.deleteById(WRONG_ID, WRONG_ID);
     }
 }
