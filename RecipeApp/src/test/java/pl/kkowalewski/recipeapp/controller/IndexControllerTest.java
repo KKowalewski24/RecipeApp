@@ -45,11 +45,14 @@ public class IndexControllerTest {
         indexController = new IndexController(recipeService);
     }
 
-    private Set<Recipe> prepareSet() {
-        return new HashSet<>(Arrays.asList(
-                new Recipe(RECIPE_ONE_ID),
-                new Recipe(RECIPE_TWO_ID)
-        ));
+    private Set<Recipe> prepareRecipeSet(Long... longs) {
+        Set<Recipe> recipes = new HashSet<>();
+
+        for (Long it : longs) {
+            recipes.add(new Recipe(it));
+        }
+
+        return recipes;
     }
 
     @Test
@@ -62,7 +65,7 @@ public class IndexControllerTest {
 
     @Test
     public void getIndexPage() {
-        Set<Recipe> recipes = prepareSet();
+        Set<Recipe> recipes = prepareRecipeSet(RECIPE_ONE_ID, RECIPE_TWO_ID);
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
         when(recipeService.prepareRecipeSet()).thenReturn(recipes);

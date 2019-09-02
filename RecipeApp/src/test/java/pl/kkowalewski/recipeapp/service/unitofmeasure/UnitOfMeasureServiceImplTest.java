@@ -39,16 +39,20 @@ public class UnitOfMeasureServiceImplTest {
                 unitOfMeasureRepository, unitOfMeasureToUnitOfMeasureCommand);
     }
 
-    private Set<UnitOfMeasure> prepareUnitOfMeasureSet() {
-        return new HashSet<>(Arrays.asList(
-                new UnitOfMeasure(UOM_ONE_ID),
-                new UnitOfMeasure(UOM_TWO_ID)
-        ));
+    private Set<UnitOfMeasure> prepareUnitOfMeasureSet(Long... longs) {
+        Set<UnitOfMeasure> unit = new HashSet<>();
+
+        for (Long it : longs) {
+            unit.add(new UnitOfMeasure(it));
+        }
+
+        return unit;
     }
 
     @Test
     public void listAllUomsTest() {
-        when(unitOfMeasureRepository.findAll()).thenReturn(prepareUnitOfMeasureSet());
+        when(unitOfMeasureRepository.findAll())
+                .thenReturn(prepareUnitOfMeasureSet(UOM_ONE_ID, UOM_TWO_ID));
 
         assertEquals(2, unitOfMeasureService.listAllUoms().size());
         verify(unitOfMeasureRepository).findAll();
