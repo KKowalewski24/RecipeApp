@@ -37,7 +37,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>,
         RecipeCommand recipeCommand = new RecipeCommand(recipe.getId(), recipe.getCookTime(),
                 recipe.getPrepTime(), recipe.getDescription(), recipe.getDifficulty(),
                 recipe.getDirections(), recipe.getServings(), recipe.getSource(),
-                recipe.getUrl(), notesConverter.convert(recipe.getNotes()));
+                recipe.getUrl(), notesConverter.convert(recipe.getNotes()), recipe.getImage());
 
         if (recipe.getCategories() != null && recipe.getCategories().size() > 0) {
             recipe.getCategories().forEach(category -> recipeCommand
