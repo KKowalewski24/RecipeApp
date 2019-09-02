@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import pl.kkowalewski.recipeapp.exception.ImageNotSavedException;
 import pl.kkowalewski.recipeapp.service.image.ImageService;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
@@ -42,7 +43,7 @@ public class ImageController {
 
     @PostMapping(HANDLE_IMAGE_POST)
     public String handleImagePost(@PathVariable String id,
-                                  @RequestParam(IMAGE_FILE) MultipartFile file) {
+                                  @RequestParam(IMAGE_FILE) MultipartFile file) throws ImageNotSavedException {
         imageService.saveImageFile(Long.valueOf(id), file);
 
         return REDIRECT + RECIPE + "/" + id + "/" + SHOW;
