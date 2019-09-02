@@ -16,7 +16,7 @@ target/
 ### IntelliJ IDEA ###
 .idea
 *.iws
-*.iml
+recipe-app.iml
 *.ipr
 
 ### NetBeans ###
