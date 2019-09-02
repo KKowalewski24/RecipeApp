@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.kkowalewski.recipeapp.command.IngredientCommand;
 import pl.kkowalewski.recipeapp.command.UnitOfMeasureCommand;
 import pl.kkowalewski.recipeapp.service.ingredient.IngredientService;
@@ -90,8 +90,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + INGREDIENT_FORM;
     }
 
-    @GetMapping
-    @RequestMapping(SAVE_UPDATE)
+    @PostMapping(SAVE_UPDATE)
     public String saveOrUpdate(@ModelAttribute IngredientCommand ingredientCommand) {
         IngredientCommand command = ingredientService.saveIngredientCommand(ingredientCommand);
 
