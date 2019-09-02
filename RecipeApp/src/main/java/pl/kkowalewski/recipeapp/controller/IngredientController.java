@@ -51,16 +51,14 @@ public class IngredientController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
-    @GetMapping
-    @RequestMapping(LIST_INGREDIENTS)
+    @GetMapping(LIST_INGREDIENTS)
     public String listIngredients(@PathVariable String recipeId, Model model) {
         model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(recipeId)));
 
         return RECIPE + "/" + INGREDIENT + "/" + LIST;
     }
 
-    @GetMapping
-    @RequestMapping(SHOW_RECIPE_INGREDIENT)
+    @GetMapping(SHOW_RECIPE_INGREDIENT)
     public String showRecipeIngredient(@PathVariable String recipeId,
                                        @PathVariable String id, Model model) {
         model.addAttribute(INGREDIENT, ingredientService
@@ -69,8 +67,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + SHOW;
     }
 
-    @GetMapping
-    @RequestMapping(NEW_RECIPE)
+    @GetMapping(NEW_RECIPE)
     public String newRecipe(@PathVariable String recipeId, Model model) {
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setRecipeId(Long.valueOf(recipeId));
@@ -82,8 +79,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + INGREDIENT_FORM;
     }
 
-    @GetMapping
-    @RequestMapping(UPDATE_RECIPE_INGREDIENT)
+    @GetMapping(UPDATE_RECIPE_INGREDIENT)
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model) {
         model.addAttribute(INGREDIENT, ingredientService.findByRecipeIdAndIngredientId(
@@ -103,8 +99,7 @@ public class IngredientController {
                 + INGREDIENT + "/" + command.getId() + "/" + SHOW;
     }
 
-    @GetMapping
-    @RequestMapping(DELETE_INGREDIENT)
+    @GetMapping(DELETE_INGREDIENT)
     public String deleteIngredient(@PathVariable String recipeId, @PathVariable String id) {
         ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));
 

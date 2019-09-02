@@ -11,8 +11,8 @@ public class IndexController {
     /*------------------------ FIELDS REGION ------------------------*/
     public static final String ROOT = "";
     public static final String SLASH = "/";
-    public static final String INDEX = "/index";
-    public static final String ATTRIBUTE = "recipes";
+    public static final String INDEX = "index";
+    public static final String RECIPES = "recipes";
 
     private final RecipeService recipeService;
 
@@ -21,10 +21,10 @@ public class IndexController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({ROOT, SLASH, INDEX})
+    @RequestMapping({ROOT, SLASH, "/" + INDEX})
     public String getIndexPage(Model model) {
-        model.addAttribute(ATTRIBUTE, recipeService.prepareRecipeSet());
+        model.addAttribute(RECIPES, recipeService.prepareRecipeSet());
 
-        return INDEX.substring(1);
+        return INDEX;
     }
 }

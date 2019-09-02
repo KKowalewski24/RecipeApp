@@ -28,6 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class IndexControllerTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
+    private static final Long RECIPE_ONE_ID = 1L;
+    private static final Long RECIPE_TWO_ID = 2L;
+
     @Mock
     private RecipeService recipeService;
 
@@ -44,8 +47,8 @@ public class IndexControllerTest {
 
     private Set<Recipe> prepareSet() {
         return new HashSet<>(Arrays.asList(
-                new Recipe(1L),
-                new Recipe(2L)
+                new Recipe(RECIPE_ONE_ID),
+                new Recipe(RECIPE_TWO_ID)
         ));
     }
 
@@ -54,7 +57,7 @@ public class IndexControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
         mockMvc.perform(get(IndexController.SLASH))
                 .andExpect(status().isOk())
-                .andExpect(view().name(IndexController.INDEX.substring(1)));
+                .andExpect(view().name(IndexController.INDEX));
     }
 
     @Test
@@ -63,10 +66,10 @@ public class IndexControllerTest {
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
         when(recipeService.prepareRecipeSet()).thenReturn(recipes);
-        assertEquals(indexController.getIndexPage(model), IndexController.INDEX.substring(1));
+        assertEquals(indexController.getIndexPage(model), IndexController.INDEX);
 
         verify(recipeService).prepareRecipeSet();
-        verify(model).addAttribute(eq(IndexController.ATTRIBUTE), argumentCaptor.capture());
+        verify(model).addAttribute(eq(IndexController.RECIPES), argumentCaptor.capture());
 
         assertEquals(argumentCaptor.getValue().size(), 2);
     }

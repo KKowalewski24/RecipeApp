@@ -2,7 +2,10 @@ package pl.kkowalewski.recipeapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
@@ -31,39 +34,34 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping
-    @RequestMapping(RECIPE_SHOW)
+    @GetMapping(RECIPE_SHOW)
     public String showById(@PathVariable String id, Model model) {
         model.addAttribute(RECIPE, recipeService.findById(Long.valueOf(id)));
 
         return RECIPE + "/" + SHOW;
     }
 
-    @GetMapping
-    @RequestMapping(RECIPE_NEW)
+    @GetMapping(RECIPE_NEW)
     public String newRecipe(Model model) {
         model.addAttribute(RECIPE, new RecipeCommand());
 
         return RECIPE_RECIPE_FORM;
     }
 
-    @GetMapping
-    @RequestMapping(RECIPE_UPDATE)
+    @GetMapping(RECIPE_UPDATE)
     public String updateRecipe(@PathVariable String id, Model model) {
         model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(id)));
 
         return RECIPE_RECIPE_FORM;
     }
 
-    @PostMapping
-    @RequestMapping(RECIPE)
+    @PostMapping(RECIPE)
     public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
         return REDIRECT + RECIPE + "/"
                 + recipeService.saveRecipeCommand(recipeCommand).getId() + "/" + SHOW;
     }
 
-    @GetMapping
-    @RequestMapping(RECIPE_DELETE)
+    @GetMapping(RECIPE_DELETE)
     public String deleteById(@PathVariable String id) {
         recipeService.deleteById(Long.valueOf(id));
 
