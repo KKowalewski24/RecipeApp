@@ -1,12 +1,12 @@
 package pl.kkowalewski.recipeapp.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
+import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 @Controller
@@ -20,6 +20,8 @@ public class RecipeController {
     public static final String UPDATE = "update";
     public static final String REDIRECT = "redirect:/";
     public static final String DELETE = "delete";
+    public static final String ERROR_404 = "404error";
+    public static final String EXCEPTION = "exception";
 
     public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
     public static final String RECIPE_NEW = RECIPE + "/" + NEW;
@@ -66,5 +68,11 @@ public class RecipeController {
         recipeService.deleteById(Long.valueOf(id));
 
         return REDIRECT;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RecipeNotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception) {
+        return new ModelAndView(ERROR_404, EXCEPTION, exception);
     }
 }
