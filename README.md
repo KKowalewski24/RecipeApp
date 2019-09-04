@@ -13,6 +13,7 @@ Project has been initialized with Spring Initializr https://start.spring.io/
 * MySQL
 * Lombok
 * JUnit 4
+* Mockito
 * JaCoCo
 * Checkstyle
 * Commons-lang3
