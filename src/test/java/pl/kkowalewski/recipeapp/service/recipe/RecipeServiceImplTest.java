@@ -8,6 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.converter.commandto.RecipeCommandToRecipe;
 import pl.kkowalewski.recipeapp.converter.tocommand.RecipeToRecipeCommand;
+import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.repository.RecipeRepository;
 
@@ -76,6 +77,15 @@ public class RecipeServiceImplTest {
         assertNotNull(recipe);
         verify(recipeRepository).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = RecipeNotFoundException.class)
+    public void findByIdExceptionTest() {
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        recipeService.findById(RECIPE_ID);
     }
 
     @Test
