@@ -21,7 +21,6 @@ public class RecipeController {
     public static final String REDIRECT = "redirect:/";
     public static final String DELETE = "delete";
     public static final String ERROR_404 = "404error";
-    public static final String ERROR_400 = "400error";
     public static final String EXCEPTION = "exception";
 
     public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
@@ -75,11 +74,5 @@ public class RecipeController {
     @ExceptionHandler(RecipeNotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
         return new ModelAndView(ERROR_404, EXCEPTION, exception);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
-    public ModelAndView handleNumberFormat(Exception exception) {
-        return new ModelAndView(ERROR_400, EXCEPTION, exception);
     }
 }

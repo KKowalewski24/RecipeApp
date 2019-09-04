@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageControllerTest {
@@ -48,7 +49,8 @@ public class ImageControllerTest {
     /*------------------------ METHODS REGION ------------------------*/
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(imageController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(imageController)
+                .setControllerAdvice(new ControllerExceptionHandler()).build();
     }
 
     private RecipeCommand prepareRecipeCommand(Long id) {
@@ -71,6 +73,14 @@ public class ImageControllerTest {
                 .andExpect(model().attributeExists(ImageController.RECIPE));
 
         verify(recipeService).findCommandById(anyLong());
+    }
+
+    @Test
+    public void showUploadFormNumberFormatExceptionTest() throws Exception {
+        mockMvc.perform(get("/" + ImageController.RECIPE + "/TEXT/"
+                + ImageController.IMAGE))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name(ControllerExceptionHandler.ERROR_400));
     }
 
     @Test

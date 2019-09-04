@@ -41,7 +41,8 @@ public class RecipeControllerTest {
     /*------------------------ METHODS REGION ------------------------*/
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(recipeController)
+                .setControllerAdvice(new ControllerExceptionHandler()).build();
     }
 
     private Recipe prepareRecipe(Long id) {
@@ -80,7 +81,7 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/" + RecipeController.RECIPE + "/text/"
                 + RecipeController.SHOW))
                 .andExpect(status().isBadRequest())
-                .andExpect(view().name(RecipeController.ERROR_400));
+                .andExpect(view().name(ControllerExceptionHandler.ERROR_400));
 
     }
 
