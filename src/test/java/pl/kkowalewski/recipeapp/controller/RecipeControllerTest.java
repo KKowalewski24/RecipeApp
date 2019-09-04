@@ -56,7 +56,8 @@ public class RecipeControllerTest {
     public void showById() throws Exception {
         when(recipeService.findById(anyLong())).thenReturn(prepareRecipe(RECIPE_ID));
 
-        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.SHOW))
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/"
+                + RecipeController.SHOW))
                 .andExpect(status().isOk())
                 .andExpect(view().name(RecipeController.RECIPE + "/"
                         + RecipeController.SHOW))
@@ -64,13 +65,23 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void showByIdExceptionTest() throws Exception {
+    public void showByIdNotFoundExceptionTest() throws Exception {
         when(recipeService.findById(anyLong())).thenThrow(RecipeNotFoundException.class);
 
-        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.SHOW))
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/"
+                + RecipeController.SHOW))
                 .andExpect(status().isNotFound())
                 .andExpect(view().name(RecipeController.ERROR_404))
                 .andExpect(model().attributeExists(RecipeController.EXCEPTION));
+    }
+
+    @Test
+    public void showByIdNumberFormatExceptionTest() throws Exception {
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/text/"
+                + RecipeController.SHOW))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name(RecipeController.ERROR_400));
+
     }
 
     @Test
@@ -83,7 +94,8 @@ public class RecipeControllerTest {
 
     @Test
     public void updateRecipeTest() throws Exception {
-        when(recipeService.saveRecipeCommand(any())).thenReturn(prepareRecipeCommand(RECIPE_ID));
+        when(recipeService.saveRecipeCommand(any()))
+                .thenReturn(prepareRecipeCommand(RECIPE_ID));
 
         mockMvc.perform(post("/" + RecipeController.RECIPE)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -96,9 +108,11 @@ public class RecipeControllerTest {
 
     @Test
     public void saveOrUpdateTest() throws Exception {
-        when(recipeService.findCommandById(anyLong())).thenReturn(prepareRecipeCommand(RECIPE_ID));
+        when(recipeService.findCommandById(anyLong()))
+                .thenReturn(prepareRecipeCommand(RECIPE_ID));
 
-        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.UPDATE))
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/"
+                + RecipeController.UPDATE))
                 .andExpect(status().isOk())
                 .andExpect(view().name(RecipeController.RECIPE_RECIPE_FORM))
                 .andExpect(model().attributeExists(RecipeController.RECIPE));
@@ -106,7 +120,8 @@ public class RecipeControllerTest {
 
     @Test
     public void deleteByIdTest() throws Exception {
-        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/" + RecipeController.DELETE))
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/"
+                + RecipeController.DELETE))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name(RecipeController.REDIRECT));
 
