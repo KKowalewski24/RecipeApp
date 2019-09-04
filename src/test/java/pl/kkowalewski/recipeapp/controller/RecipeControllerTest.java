@@ -72,16 +72,17 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/" + RecipeController.RECIPE + "/1/"
                 + RecipeController.SHOW))
                 .andExpect(status().isNotFound())
-                .andExpect(view().name(RecipeController.ERROR_404))
-                .andExpect(model().attributeExists(RecipeController.EXCEPTION));
+                .andExpect(view().name(ControllerExceptionHandler.ERROR_404))
+                .andExpect(model().attributeExists(ControllerExceptionHandler.EXCEPTION));
     }
 
     @Test
     public void showByIdNumberFormatExceptionTest() throws Exception {
-        mockMvc.perform(get("/" + RecipeController.RECIPE + "/text/"
+        mockMvc.perform(get("/" + RecipeController.RECIPE + "/TEXT/"
                 + RecipeController.SHOW))
                 .andExpect(status().isBadRequest())
-                .andExpect(view().name(ControllerExceptionHandler.ERROR_400));
+                .andExpect(view().name(ControllerExceptionHandler.ERROR_400))
+                .andExpect(model().attributeExists(ControllerExceptionHandler.EXCEPTION));
 
     }
 
