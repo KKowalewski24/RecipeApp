@@ -16,6 +16,7 @@ import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -102,10 +103,26 @@ public class RecipeControllerTest {
         mockMvc.perform(post("/" + RecipeController.RECIPE)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
-                .param("description", "some string"))
+                .param("description", "some string")
+                .param("directions", "some directions")
+        )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name(RecipeController.REDIRECT
                         + RecipeController.RECIPE + "/1/" + RecipeController.SHOW));
+    }
+
+    @Test
+    public void UpdateErrorTest() throws Exception {
+        lenient().when(recipeService.saveRecipeCommand(any()))
+                .thenReturn(prepareRecipeCommand(RECIPE_ID));
+
+        mockMvc.perform(post("/" + RecipeController.RECIPE)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+        )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists(RecipeController.RECIPE))
+                .andExpect(view().name(RecipeController.RECIPE_RECIPE_FORM));
     }
 
     @Test

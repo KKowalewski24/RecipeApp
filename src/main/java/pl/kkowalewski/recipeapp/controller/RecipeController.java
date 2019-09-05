@@ -2,12 +2,15 @@ package pl.kkowalewski.recipeapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
+
+import javax.validation.Valid;
 
 @Controller
 public class RecipeController {
@@ -24,8 +27,8 @@ public class RecipeController {
     public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
     public static final String RECIPE_NEW = RECIPE + "/" + NEW;
     public static final String RECIPE_UPDATE = RECIPE + "/{id}/" + UPDATE;
-    public static final String RECIPE_RECIPE_FORM = RECIPE + "/" + RECIPE_FORM;
     public static final String RECIPE_DELETE = RECIPE + "/{id}/" + DELETE;
+    public static final String RECIPE_RECIPE_FORM = RECIPE + "/" + RECIPE_FORM;
 
     private final RecipeService recipeService;
 
@@ -56,7 +59,12 @@ public class RecipeController {
     }
 
     @PostMapping(RECIPE)
-    public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
+    public String saveOrUpdate(@Valid @ModelAttribute(RECIPE) RecipeCommand recipeCommand,
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return RECIPE_RECIPE_FORM;
+        }
+
         return REDIRECT + RECIPE + "/"
                 + recipeService.saveRecipeCommand(recipeCommand).getId() + "/" + SHOW;
     }
