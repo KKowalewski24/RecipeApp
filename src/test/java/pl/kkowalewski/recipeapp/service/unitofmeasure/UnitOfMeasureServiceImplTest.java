@@ -9,7 +9,6 @@ import pl.kkowalewski.recipeapp.converter.tocommand.UnitOfMeasureToUnitOfMeasure
 import pl.kkowalewski.recipeapp.model.UnitOfMeasure;
 import pl.kkowalewski.recipeapp.repository.UnitOfMeasureRepository;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +22,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INDEX;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPES;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.SLASH;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IndexControllerTest {
@@ -58,9 +60,9 @@ public class IndexControllerTest {
     @Test
     public void mockMvcTest() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
-        mockMvc.perform(get(IndexController.SLASH))
+        mockMvc.perform(get(SLASH))
                 .andExpect(status().isOk())
-                .andExpect(view().name(IndexController.INDEX));
+                .andExpect(view().name(INDEX));
     }
 
     @Test
@@ -69,10 +71,10 @@ public class IndexControllerTest {
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
         when(recipeService.prepareRecipeSet()).thenReturn(recipes);
-        assertEquals(indexController.getIndexPage(model), IndexController.INDEX);
+        assertEquals(indexController.getIndexPage(model), INDEX);
 
         verify(recipeService).prepareRecipeSet();
-        verify(model).addAttribute(eq(IndexController.RECIPES), argumentCaptor.capture());
+        verify(model).addAttribute(eq(RECIPES), argumentCaptor.capture());
 
         assertEquals(argumentCaptor.getValue().size(), 2);
     }

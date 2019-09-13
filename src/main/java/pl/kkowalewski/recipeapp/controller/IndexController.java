@@ -5,15 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INDEX;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPES;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.ROOT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.SLASH;
+
 @Controller
 public class IndexController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String ROOT = "";
-    public static final String SLASH = "/";
-    public static final String INDEX = "index";
-    public static final String RECIPES = "recipes";
-
     private final RecipeService recipeService;
 
     /*------------------------ METHODS REGION ------------------------*/

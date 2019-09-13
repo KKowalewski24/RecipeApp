@@ -12,23 +12,19 @@ import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
 import javax.validation.Valid;
 
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_DELETE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_NEW;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_RECIPE_FORM;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_SHOW;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_UPDATE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.REDIRECT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.SHOW;
+
 @Controller
 public class RecipeController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String RECIPE = "recipe";
-    public static final String RECIPE_FORM = "recipeform";
-    public static final String SHOW = "show";
-    public static final String NEW = "new";
-    public static final String UPDATE = "update";
-    public static final String REDIRECT = "redirect:/";
-    public static final String DELETE = "delete";
-
-    public static final String RECIPE_SHOW = "/" + RECIPE + "/{id}/" + SHOW;
-    public static final String RECIPE_NEW = RECIPE + "/" + NEW;
-    public static final String RECIPE_UPDATE = RECIPE + "/{id}/" + UPDATE;
-    public static final String RECIPE_DELETE = RECIPE + "/{id}/" + DELETE;
-    public static final String RECIPE_RECIPE_FORM = RECIPE + "/" + RECIPE_FORM;
 
     private final RecipeService recipeService;
 

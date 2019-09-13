@@ -11,7 +11,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.kkowalewski.recipeapp.command.RecipeCommand;
-import pl.kkowalewski.recipeapp.model.Recipe;
 import pl.kkowalewski.recipeapp.service.image.ImageService;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 
@@ -26,13 +25,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.ERROR_400;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.IMAGE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE_IMAGE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.SHOW;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageControllerTest {
 
     /*------------------------ FIELDS REGION ------------------------*/
     private static final Long RECIPE_ID = 1L;
-    private static final String PATH = "/" + ImageController.RECIPE + "/1/" + ImageController.IMAGE;
+    private static final String PATH = "/" + RECIPE + "/1/" + IMAGE;
     private static final String TEXT = "sample text";
 
     @Mock
@@ -70,17 +74,16 @@ public class ImageControllerTest {
 
         mockMvc.perform(get(PATH))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists(ImageController.RECIPE));
+                .andExpect(model().attributeExists(RECIPE));
 
         verify(recipeService).findCommandById(anyLong());
     }
 
     @Test
     public void showUploadFormNumberFormatExceptionTest() throws Exception {
-        mockMvc.perform(get("/" + ImageController.RECIPE + "/TEXT/"
-                + ImageController.IMAGE))
+        mockMvc.perform(get("/" + RECIPE + "/TEXT/" + IMAGE))
                 .andExpect(status().isBadRequest())
-                .andExpect(view().name(ControllerExceptionHandler.ERROR_400));
+                .andExpect(view().name(ERROR_400));
     }
 
     @Test
@@ -91,7 +94,7 @@ public class ImageControllerTest {
         mockMvc.perform(multipart(PATH).file(multipartFile))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().string("Location",
-                        "/" + ImageController.RECIPE + "/1/" + ImageController.SHOW));
+                        "/" + RECIPE + "/1/" + SHOW));
 
         verify(imageService).saveImageFile(anyLong(), any());
     }
@@ -108,8 +111,7 @@ public class ImageControllerTest {
                 .thenReturn(prepareRecipeCommand(RECIPE_ID, textArray));
 
         MockHttpServletResponse response = mockMvc
-                .perform(get("/" + ImageController.RECIPE + "/1/"
-                        + ImageController.RECIPE_IMAGE))
+                .perform(get("/" + RECIPE + "/1/" + RECIPE_IMAGE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
 

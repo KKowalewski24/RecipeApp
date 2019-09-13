@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import pl.kkowalewski.recipeapp.exception.RecipeNotFoundException;
 
+import static pl.kkowalewski.recipeapp.constant.AppConstants.ERROR_400;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.ERROR_404;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.EXCEPTION;
+
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String ERROR_400 = "400error";
-    public static final String ERROR_404 = "404error";
-    public static final String EXCEPTION = "exception";
 
     /*------------------------ METHODS REGION ------------------------*/
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -12,32 +12,25 @@ import pl.kkowalewski.recipeapp.service.ingredient.IngredientService;
 import pl.kkowalewski.recipeapp.service.recipe.RecipeService;
 import pl.kkowalewski.recipeapp.service.unitofmeasure.UnitOfMeasureService;
 
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENTS;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_DELETE_INGREDIENT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_FORM;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_LIST_INGREDIENTS;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_NEW_RECIPE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_SAVE_UPDATE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_SHOW_RECIPE_INGREDIENT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.INGREDIENT_UPDATE_RECIPE_INGREDIENT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.LIST;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.RECIPE;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.REDIRECT;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.SHOW;
+import static pl.kkowalewski.recipeapp.constant.AppConstants.UOM_LIST;
+
 @Controller
 public class IngredientController {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String RECIPE = "recipe";
-    public static final String INGREDIENT = "ingredient";
-    public static final String INGREDIENTS = "ingredients";
-    public static final String LIST = "list";
-    public static final String SHOW = "show";
-    public static final String UOM_LIST = "uomList";
-    public static final String INGREDIENT_FORM = "ingredientform";
-    public static final String UPDATE = "update";
-    public static final String REDIRECT = "redirect:/";
-    public static final String NEW = "new";
-    public static final String DELETE = "delete";
-
-    /*----- REQUEST MAPPINGS -----*/
-    public static final String LIST_INGREDIENTS = "/" + RECIPE + "/{recipeId}/" + INGREDIENTS;
-    public static final String SHOW_RECIPE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
-            + "/{id}/" + SHOW;
-    public static final String UPDATE_RECIPE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
-            + "/{id}/" + UPDATE;
-    public static final String SAVE_UPDATE = RECIPE + "/{recipeId}/" + INGREDIENT;
-    public static final String NEW_RECIPE = RECIPE + "/{recipeId}/" + INGREDIENT + "/" + NEW;
-    public static final String DELETE_INGREDIENT = RECIPE + "/{recipeId}/" + INGREDIENT
-            + "/{id}/" + DELETE;
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
@@ -51,14 +44,14 @@ public class IngredientController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
-    @GetMapping(LIST_INGREDIENTS)
+    @GetMapping(INGREDIENT_LIST_INGREDIENTS)
     public String listIngredients(@PathVariable String recipeId, Model model) {
         model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(recipeId)));
 
         return RECIPE + "/" + INGREDIENT + "/" + LIST;
     }
 
-    @GetMapping(SHOW_RECIPE_INGREDIENT)
+    @GetMapping(INGREDIENT_SHOW_RECIPE_INGREDIENT)
     public String showRecipeIngredient(@PathVariable String recipeId,
                                        @PathVariable String id, Model model) {
         model.addAttribute(INGREDIENT, ingredientService
@@ -67,7 +60,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + SHOW;
     }
 
-    @GetMapping(NEW_RECIPE)
+    @GetMapping(INGREDIENT_NEW_RECIPE)
     public String newRecipe(@PathVariable String recipeId, Model model) {
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setRecipeId(Long.valueOf(recipeId));
@@ -79,7 +72,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + INGREDIENT_FORM;
     }
 
-    @GetMapping(UPDATE_RECIPE_INGREDIENT)
+    @GetMapping(INGREDIENT_UPDATE_RECIPE_INGREDIENT)
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model) {
         model.addAttribute(INGREDIENT, ingredientService.findByRecipeIdAndIngredientId(
@@ -90,7 +83,7 @@ public class IngredientController {
         return RECIPE + "/" + INGREDIENT + "/" + INGREDIENT_FORM;
     }
 
-    @PostMapping(SAVE_UPDATE)
+    @PostMapping(INGREDIENT_SAVE_UPDATE)
     public String saveOrUpdate(@ModelAttribute IngredientCommand ingredientCommand) {
         IngredientCommand command = ingredientService.saveIngredientCommand(ingredientCommand);
 
@@ -98,7 +91,7 @@ public class IngredientController {
                 + INGREDIENT + "/" + command.getId() + "/" + SHOW;
     }
 
-    @GetMapping(DELETE_INGREDIENT)
+    @GetMapping(INGREDIENT_DELETE_INGREDIENT)
     public String deleteIngredient(@PathVariable String recipeId, @PathVariable String id) {
         ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));
 
