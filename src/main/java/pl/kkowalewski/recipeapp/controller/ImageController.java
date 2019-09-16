@@ -31,8 +31,8 @@ public class ImageController {
 
     /*------------------------ FIELDS REGION ------------------------*/
 
-    public final RecipeService recipeService;
-    public final ImageService imageService;
+    private final RecipeService recipeService;
+    private final ImageService imageService;
 
     /*------------------------ METHODS REGION ------------------------*/
     public ImageController(RecipeService recipeService, ImageService imageService) {
