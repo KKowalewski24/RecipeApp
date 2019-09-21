@@ -5,146 +5,60 @@
 
   <!-------------------- HEAD SECTION -------------------->
   <head>
-
-    <!-------------------- META SECTION -------------------->
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-
-    <!-------------------- TITLE SECTION -------------------->
-    <title></title>
-
-    <!-------------------- LINK SECTION -------------------->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-    >
-    <link
-        rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    >
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css"
-    >
-    <link
-        href="./css/main.css"
-        rel="stylesheet"
-        type="text/css"
-    />
-
+    <th:block th:insert="fragments/head :: head"/>
   </head>
 
   <!-------------------- BODY SECTION -------------------->
-  <body >
+  <body>
 
-    <!-- Navbar  -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color lighten-1">
-      <a class="navbar-brand" href="#">
-        Tasty Recipes
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-              data-target="#navbarSupportedContent-555"
-              aria-controls="navbarSupportedContent-555"
-              aria-expanded="false" aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"/>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item avatar">
-            <a class="nav-link p-0" href="#">
-              <img
-                  src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
-                  class="rounded-circle z-depth-0"
-                  alt="avatar image" height="35"
-              >
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <!-------------------- NAVBAR SECTION -------------------->
+    <th:block th:insert="fragments/navbar :: navbar"/>
 
-    <div th:if="${not #lists.isEmpty(recipes)}">
-      <table id="dtMaterialDesignExample" class="table table-striped"
-             cellspacing="0" width="100%"
-      >
-        <thead>
-          <tr>
-            <th class="th-sm">ID</th>
-            <th class="th-sm">Description</th>
-            <th class="th-sm">View</th>
-            <th class="th-sm">Update</th>
-            <th class="th-sm">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:remove="all">
-            <td>123</td>
-            <td>Tasty Goodnees 1</td>
-            <td><a href="#">View</a></td>
-          </tr>
+    <!-------------------- TABLE SECTION -------------------->
+    <table
+        id="dtMaterialDesignExample"
+        class="table table-striped"
+        cellspacing="0" width="100%"
+    >
+      <thead>
+        <tr>
+          <th class="th-sm">ID</th>
+          <th class="th-sm">Description</th>
+          <th class="th-sm">View</th>
+          <th class="th-sm">Update</th>
+          <th class="th-sm">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:remove="all">
+          <td>123</td>
+          <td>Tasty Goodnees 1</td>
+          <td><a href="#">View</a></td>
+        </tr>
 
-          <tr th:remove="all">
-            <td>12333</td>
-            <td>Tasty Goodnees 2</td>
-            <td><a href="#">View</a></td>
-          </tr>
-          <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.id}">334</td>
-            <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-            <td>
-              <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a>
-            </td>
-            <td>
-              <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a>
-            </td>
-            <td>
-              <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <tr th:remove="all">
+          <td>12333</td>
+          <td>Tasty Goodnees 2</td>
+          <td><a href="#">View</a></td>
+        </tr>
+        <tr th:each="recipe : ${recipes}">
+          <td th:text="${recipe.id}">334</td>
+          <td th:text="${recipe.description}">Tasty Goodnees 3</td>
+          <td>
+            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a>
+          </td>
+          <td>
+            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a>
+          </td>
+          <td>
+            <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-------------------- SCRIPT SECTION -------------------->
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-    </script>
-
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
-    </script>
-
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
-    </script>
-
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js">
-    </script>
-
-    <script
-        src="./js/main.js">
-    </script>
+    <th:block th:insert="fragments/scripts :: scripts"/>
 
   </body>
 
