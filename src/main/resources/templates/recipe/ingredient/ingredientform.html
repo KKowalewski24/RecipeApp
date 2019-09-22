@@ -1,69 +1,59 @@
 <!DOCTYPE html>
+
+<!-------------------- HTML SECTION -------------------->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <!-------------------- HEAD SECTION -------------------->
   <head>
-    <meta charset="UTF-8"/>
-    <title>Edit Ingredient</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
-
-    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"
-            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <th:block th:insert="fragments/head :: head"/>
   </head>
+
+  <!-------------------- BODY SECTION -------------------->
   <body>
 
-    <div class="container-fluid" style="margin-top: 20px">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <!--/*@thymesVar id="ingredient" type="pl.kkowalewski.recipeapp.command.IngredientCommand"*/-->
-          <form th:object="${ingredient}"
-                th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} "
-                method="post">
-            <input type="hidden" th:field="*{id}"/>
-            <div class="pannel-group">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h1 class="panel-title">Edit Ingredient Information</h1>
-                </div>
-                <div class="panel-body">
+    <!-------------------- NAVBAR SECTION -------------------->
+    <th:block th:insert="fragments/navbar :: navbar"/>
 
-                  <div class="row">
-                    <div class="col-md-3 form-group">
-                      <label>Description:</label>
-                      <input type="text" class="form-control" th:field="*{description}"/>
-                    </div>
+    <!-------------------- TABLE SECTION -------------------->
+    <form th:object="${ingredient}"
+          th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} "
+          method="post">
+      <div class="container my-5 card ">
+        <div class="card-body">
+          <h5 class="card-title">Edit Ingredient Information</h5>
+          <div class="panel-body">
 
-                    <div class="col-md-3 form-group">
-                      <label>Amount:</label>
-                      <input type="number" class="form-control" th:field="*{amount}"/>
-                    </div>
-
-                    <div class="col-md-3 form-group">
-                      <label>UOM:</label>
-                      <select class="form-control" name="uom.id">
-                        <option th:each="uomEach : ${uomList}"
-                                th:value="${uomEach.id}"
-                                th:selected="${uomEach.id.equals(ingredient.uom.id)}"
-                                th:text="${uomEach.description}">Each
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+            <div class="row">
+              <div class="col-md-3 form-group">
+                <label>Description:</label>
+                <input type="text" class="form-control" th:field="*{description}"/>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+
+              <div class="col-md-3 form-group">
+                <label>Amount:</label>
+                <input type="number" class="form-control" th:field="*{amount}"/>
+              </div>
+
+              <div class="col-md-3 form-group">
+                <label>UOM:</label>
+                <select class="form-control" name="uom.id">
+                  <option th:each="uomEach : ${uomList}"
+                          th:value="${uomEach.id}"
+                          th:selected="${uomEach.id.equals(ingredient.uom.id)}"
+                          th:text="${uomEach.description}">Each
+                  </option>
+                </select>
+              </div>
+
             </div>
-          </form>
+          </div>
+          <button type="submit" class="btn info-color white-text">Submit</button>
         </div>
       </div>
-    </div>
+    </form>
+    <!-------------------- SCRIPT SECTION -------------------->
+    <th:block th:insert="fragments/scripts :: scripts"/>
+
   </body>
+
 </html>
