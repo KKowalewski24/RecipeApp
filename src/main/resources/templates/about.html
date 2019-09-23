@@ -17,8 +17,8 @@
     <!-------------------- PANEL SECTION -------------------->
     <div class="container card mt-4">
       <div class="card-body">
-        <h3 class="card-title">vfvfvfv</h3>
-<!--        <p th:text="${exception.getMessage()}"/>-->
+        <h3 class="card-title" th:text="'About ' + ${about.pageName}"/>
+        <p th:text="${about.description}"/>
       </div>
     </div>
 

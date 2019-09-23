@@ -14,7 +14,18 @@
     <!-------------------- NAVBAR SECTION -------------------->
     <th:block th:insert="fragments/navbar :: navbar"/>
 
-    <!--------------------  SECTION -------------------->
+    <!-------------------- PANEL SECTION -------------------->
+    <div class="container card mt-4">
+      <div class="card-body">
+        <h5 class="font-weight-bold mb-3" th:text="'Contact to ' + ${contact.pageName} + ' Developer'"/>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:text="'Author: ' + ${contact.author}"/>
+        <li class="list-group-item" th:text="'e-mail: ' + ${contact.email}"/>
+        <li class="list-group-item" th:text="'Telephone: ' + ${contact.telephone}"/>
+        <li class="list-group-item" th:text="'Copyright: ' + ${contact.copyright}"/>
+      </ul>
+    </div>
 
     <!-------------------- SCRIPT SECTION -------------------->
     <th:block th:insert="fragments/scripts :: scripts"/>

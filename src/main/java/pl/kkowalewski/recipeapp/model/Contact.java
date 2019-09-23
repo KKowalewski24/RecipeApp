@@ -22,17 +22,19 @@ public class Contact {
 
     private String pageName;
     private String author;
+    private String email;
+    private String telephone;
     private String copyright;
-    private String description;
 
     /*------------------------ METHODS REGION ------------------------*/
     public Contact() {
     }
 
-    public Contact(String pageName, String author, String copyright, String description) {
+    public Contact(String pageName, String author, String email, String copyright, String telephone) {
         this.pageName = pageName;
         this.author = author;
+        this.email = email;
         this.copyright = copyright;
-        this.description = description;
+        this.telephone = telephone;
     }
 }
