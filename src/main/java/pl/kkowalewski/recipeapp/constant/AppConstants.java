@@ -3,6 +3,15 @@ package pl.kkowalewski.recipeapp.constant;
 public class AppConstants {
 
     /*------------------------ FIELDS REGION ------------------------*/
+    public static final String PAGE_NAME = "Tasty Recipes";
+    public static final String AUTHOR = "Kamil Kowalewski";
+    public static final String COPYRIGHT = "All rights reserved";
+    public static final String EMAIL = "contact@tastyrecipes.org";
+    public static final String TELEPHONE = "798 564 357";
+    public static final String DESCRIPTION = "Website has been created to give people possibility" +
+            " to share awesome recipe and improve quality of every day food. I hope it's gonna " +
+            "improve people's health and their entire life.";
+
     public static final String ERROR_400 = "400error";
     public static final String ERROR_404 = "404error";
     public static final String EXCEPTION = "exception";
@@ -28,6 +37,11 @@ public class AppConstants {
     public static final String RECIPE_FORM = "recipeform";
     public static final String ID = "/{id}/";
     public static final String RECIPE_ID = "/{recipeId}/";
+    public static final String ABOUT = "about";
+    public static final String CONTACT = "contact";
+
+    public static final String PATH_ABOUT = SLASH + ABOUT;
+    public static final String PATH_CONTACT = SLASH + CONTACT;
 
     public static final String IMAGE_SHOW_UPLOAD_FORM = RECIPE + ID + IMAGE;
     public static final String IMAGE_HANDLE_IMAGE_POST = RECIPE + ID + IMAGE;
