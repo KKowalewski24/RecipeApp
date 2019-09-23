@@ -1,6 +1,6 @@
 # RecipeApp
 
-Spring Boot (ver. 2.1.6) project based on awesome course found on the internet.
+Spring Boot (ver. 2.1.6) web application (MVC) project.
 
 Project has been initialized with Spring Initializr https://start.spring.io/
 
