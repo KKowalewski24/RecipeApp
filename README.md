@@ -19,16 +19,16 @@ Project has been initialized with Spring Initializr https://start.spring.io/
 * Commons-lang3
 
 #### Chosen screenshots
-![](assets/TastyRecipes_1.png)
+<kbd>![](assets/TastyRecipes_1.png)</kbd>
 
-![](assets/TastyRecipes_2.png)
+<kbd>![](assets/TastyRecipes_2.png)</kbd>
 
-![](assets/TastyRecipes_3.png)
+<kbd>![](assets/TastyRecipes_3.png)</kbd>
 
-![](assets/TastyRecipes_4.png)
+<kbd>![](assets/TastyRecipes_4.png)</kbd>
 
-![](assets/TastyRecipes_5.png)
+<kbd>![](assets/TastyRecipes_5.png)</kbd>
 
-![](assets/TastyRecipes_6.png)
+<kbd>![](assets/TastyRecipes_6.png)</kbd>
 
-![](assets/TastyRecipes_7.png)
+<kbd>![](assets/TastyRecipes_7.png)</kbd>
