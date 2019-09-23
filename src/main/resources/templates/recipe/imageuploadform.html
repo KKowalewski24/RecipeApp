@@ -14,20 +14,23 @@
     <!-------------------- NAVBAR SECTION -------------------->
     <th:block th:insert="fragments/navbar :: navbar"/>
 
-    <!-------------------- TABLE SECTION -------------------->
-    <div class="my-5">
-      <form
-          action="http:\\localhost" method="post" enctype="multipart/form-data"
-          th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}"
-      >
-        <div class="input-group">
-          <button type="submit">Submit</button>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagefile" id="imagefile">
-            <label class="custom-file-label" for="imagefile">Choose file</label>
+    <!-------------------- PANEL SECTION -------------------->
+    <div class="container card mt-4">
+      <div class="card-body">
+        <h3 class="card-title">Upload Image</h3>
+        <form
+            action="http:\\localhost" method="post" enctype="multipart/form-data"
+            th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}"
+        >
+          <div class="input-group">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="imagefile" id="imagefile">
+              <label class="custom-file-label" for="imagefile">Choose file</label>
+            </div>
           </div>
-        </div>
-      </form>
+          <button type="submit" class="btn info-color white-text">Submit</button>
+        </form>
+      </div>
     </div>
 
     <!-------------------- SCRIPT SECTION -------------------->

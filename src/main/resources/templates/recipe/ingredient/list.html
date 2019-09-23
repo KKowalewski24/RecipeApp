@@ -30,16 +30,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:remove="all">
-          <td>123</td>
-          <td>Tasty Goodnees 1</td>
-          <td><a href="#">View</a></td>
-        </tr>
-        <tr th:remove="all">
-          <td>12333</td>
-          <td>Tasty Goodnees 2</td>
-          <td><a href="#">View</a></td>
-        </tr>
         <tr th:each="ingredient : ${recipe.ingredients}">
           <td th:text="${ingredient.id}"/>
           <td th:text="${ingredient.amount} + ' '
@@ -75,5 +65,4 @@
     <th:block th:insert="fragments/scripts :: scripts"/>
 
   </body>
-
 </html>

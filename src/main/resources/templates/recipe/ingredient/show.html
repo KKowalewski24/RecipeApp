@@ -14,29 +14,15 @@
     <!-------------------- NAVBAR SECTION -------------------->
     <th:block th:insert="fragments/navbar :: navbar"/>
 
-    <!-------------------- TABLE SECTION -------------------->
-    <table
-        id="dtMaterialDesignExample"
-        class="table table-striped"
-        cellspacing="0" width="100%"
-    >
-      <thead>
-        <tr>
-          <th class="th-sm">ID</th>
-          <th class="th-sm">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td th:text="${ingredient.id}"/>
-          <td
-              th:text="${ingredient.amount} + ' '
+    <!-------------------- PANEL SECTION -------------------->
+    <div class="container card mt-4">
+      <div class="card-body">
+        <h3 class="card-title">Ingredient</h3>
+        <p th:text="${ingredient.amount} + ' '
               + ${ingredient.uom.getDescription()} + ' '
-              + ${ingredient.description}"
-          />
-        </tr>
-      </tbody>
-    </table>
+              + ${ingredient.description}"/>
+      </div>
+    </div>
 
     <!-------------------- SCRIPT SECTION -------------------->
     <th:block th:insert="fragments/scripts :: scripts"/>

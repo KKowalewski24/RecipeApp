@@ -4,9 +4,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
   <!-------------------- BODY SECTION -------------------->
-  <body th:fragment="navbar">
+  <body>
 
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color lighten-1">
+    <nav th:fragment="navbar" class="mb-1 navbar navbar-expand-lg navbar-dark info-color lighten-1">
       <a class="navbar-brand" href="/">
         Tasty Recipes
       </a>
@@ -44,5 +44,4 @@
     </nav>
 
   </body>
-
 </html>

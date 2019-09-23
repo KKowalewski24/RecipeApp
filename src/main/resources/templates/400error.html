@@ -14,13 +14,13 @@
     <!-------------------- NAVBAR SECTION -------------------->
     <th:block th:insert="fragments/navbar :: navbar"/>
 
-    <div class="container-fluid" style="margin-top: 20px">
-      <div class="row">
-        <h1>400 ERROR - Bad Request</h1>
-        <p th:text="${exception.getMessage()}"></p>
+    <!-------------------- PANEL SECTION -------------------->
+    <div class="container card mt-4">
+      <div class="card-body">
+        <h3 class="card-title">400 ERROR - Bad Request</h3>
+        <p th:text="${exception.getMessage()}"/>
       </div>
     </div>
 
   </body>
-
 </html>
