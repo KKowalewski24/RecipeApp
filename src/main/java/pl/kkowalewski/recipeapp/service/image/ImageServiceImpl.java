@@ -31,11 +31,11 @@ public class ImageServiceImpl implements ImageService {
                 fileBytesArray[i] = file.getBytes()[i];
             }
 
-//            IN CASE OF ISSUES REPLACE ABOVE LOOP THIS ONE
-//            int i = 0;
-//            for (byte b : file.getBytes()){
-//                fileBytesArray[i++] = b;
-//            }
+//          IN CASE OF ISSUES REPLACE ABOVE LOOP THIS ONE
+//          int i = 0;
+//          for (byte b : file.getBytes()) {
+//              fileBytesArray[i++] = b;
+//          }
 
             recipe.setImage(fileBytesArray);
             recipeRepository.save(recipe);

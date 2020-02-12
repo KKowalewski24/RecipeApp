@@ -17,8 +17,9 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository,
-                                    UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
+    public UnitOfMeasureServiceImpl(
+            UnitOfMeasureRepository unitOfMeasureRepository,
+            UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.unitOfMeasureToUnitOfMeasureCommand = unitOfMeasureToUnitOfMeasureCommand;
     }

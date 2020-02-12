@@ -8,9 +8,9 @@ public class AppConstants {
     public static final String COPYRIGHT = "All rights reserved";
     public static final String EMAIL = "contact@tastyrecipes.org";
     public static final String TELEPHONE = "798 564 357";
-    public static final String DESCRIPTION = "Website has been created to give people possibility" +
-            " to share awesome recipe and improve quality of every day food. I hope it's gonna " +
-            "improve people's health and their entire life.";
+    public static final String DESCRIPTION = "Website has been created to give people possibility"
+            + " to share awesome recipe and improve quality of every day food. I hope it's gonna "
+            + "improve people's health and their entire life.";
 
     public static final String ERROR_400 = "400error";
     public static final String ERROR_404 = "404error";
@@ -66,5 +66,6 @@ public class AppConstants {
             + INGREDIENT + ID + DELETE;
 
     /*------------------------ METHODS REGION ------------------------*/
-
+    private AppConstants() {
+    }
 }
