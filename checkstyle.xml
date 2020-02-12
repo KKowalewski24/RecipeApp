@@ -207,12 +207,12 @@
         </module>
 
         <module name="OverloadMethodsDeclarationOrder"/>
-<!--        <module name="VariableDeclarationUsageDistance"/>-->
+        <!--        <module name="VariableDeclarationUsageDistance"/>-->
 
         <module name="CustomImportOrder">
-<!--            <property name="sortImportsInGroupAlphabetically" value="true"/>-->
+            <!--            <property name="sortImportsInGroupAlphabetically" value="true"/>-->
             <property name="separateLineBetweenGroups" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+            <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###STATIC"/>
         </module>
 
         <module name="MethodParamPad"/>
@@ -284,6 +284,6 @@
             <property name="exceptionVariableName" value="expected"/>
         </module>
 
-<!--        <module name="CommentsIndentation"/>-->
+        <!--        <module name="CommentsIndentation"/>-->
     </module>
 </module>
