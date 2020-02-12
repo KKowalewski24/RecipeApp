@@ -17,7 +17,8 @@
     <!-------------------- PANEL SECTION -------------------->
     <div class="container card mt-4">
       <div class="card-body">
-        <h5 class="font-weight-bold mb-3" th:text="'Contact to ' + ${contact.pageName} + ' Developer'"/>
+        <h5 class="row justify-content-center font-weight-bold mb-3"
+            th:text="'Contact to ' + ${contact.pageName} + ' Developer'"/>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" th:text="'Author: ' + ${contact.author}"/>

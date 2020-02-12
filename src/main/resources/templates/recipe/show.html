@@ -17,12 +17,14 @@
     <!-------------------- PANEL SECTION -------------------->
     <div class="container card mt-4">
       <div class="card-body">
-        <h5 class="font-weight-bold mb-3" th:text="${recipe.description}"/>
-        <a class="btn info-color white-text mb-4" href="#" role="button"
-           th:href="@{'/recipe/' + ${recipe.id} + '/image'}"
-        >
-          Change Image
-        </a>
+        <h5 class="row justify-content-center font-weight-bold mb-3"
+            th:text="${recipe.description}"/>
+        <div class="row justify-content-center">
+          <a class="btn info-color white-text mb-4" href="#" role="button"
+             th:href="@{'/recipe/' + ${recipe.id} + '/image'}">
+            Change Image
+          </a>
+        </div>
 
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -41,9 +43,12 @@
             <p th:text="${'Source: ' + (recipe.source)}"/>
           </li>
           <li class="list-group-item">
-            <p>
-              <a href="#" th:href="@{recipe.url}">View Original</a>
-            </p>
+            <div class="row justify-content-center">
+              <a class="btn info-color white-text mb-4"
+                 href="#" role="button" th:href="@{recipe.url}">
+                View Original
+              </a>
+            </div>
           </li>
         </ul>
 
@@ -52,12 +57,16 @@
 
     <div class="container card mt-4">
       <div class="card-body">
-        <h5 class="font-weight-bold mb-3">Ingredients</h5>
-        <a class="btn info-color white-text mb-4" href="#" role="button"
-           th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}"
-        >
+        <h5 class="row justify-content-center font-weight-bold mb-3">
+          Ingredients
+        </h5>
+        <div class="row justify-content-center">
+          <a class="btn info-color white-text mb-4" href="#"
+                role="button"
+                th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}">
           View
         </a>
+        </div>
 
         <ul class="list-group list-group-flush">
           <li class="list-group-item" th:each="ingredient : ${recipe.ingredients}"
@@ -72,14 +81,18 @@
 
     <div class="container card mt-4">
       <div class="card-body">
-        <h3 class="card-title">Directions</h3>
+        <h3 class="row justify-content-center card-title">
+          Directions
+        </h3>
         <p th:text="${recipe.directions}"/>
       </div>
     </div>
 
     <div class="container card mt-4 mb-4">
       <div class="card-body">
-        <h3 class="card-title">Notes</h3>
+        <h3 class="row justify-content-center card-title">
+          Notes
+        </h3>
         <p th:text="${recipe.notes.recipeNotes}"/>
       </div>
     </div>

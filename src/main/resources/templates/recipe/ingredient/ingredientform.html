@@ -15,12 +15,13 @@
     <th:block th:insert="fragments/navbar :: navbar"/>
 
     <!-------------------- PANEL SECTION -------------------->
-    <form th:object="${ingredient}"
-          th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} "
-          method="post">
+    <form th:object="${ingredient}" method="post"
+          th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} ">
       <div class="container my-5 card ">
         <div class="card-body">
-          <h5 class="card-title">Edit Ingredient Information</h5>
+          <h5 class="row justify-content-center card-title">
+            Edit Ingredient Information
+          </h5>
           <div class="panel-body">
 
             <div class="row">
@@ -47,7 +48,13 @@
 
             </div>
           </div>
-          <button type="submit" class="btn info-color white-text">Submit</button>
+
+          <div class="row justify-content-center">
+            <button type="submit" class="btn info-color white-text">
+              Submit
+            </button>
+          </div>
+
         </div>
       </div>
     </form>

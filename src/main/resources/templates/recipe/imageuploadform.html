@@ -17,18 +17,22 @@
     <!-------------------- PANEL SECTION -------------------->
     <div class="container card mt-4">
       <div class="card-body">
-        <h3 class="card-title">Upload Image</h3>
-        <form
-            action="http:\\localhost" method="post" enctype="multipart/form-data"
-            th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}"
-        >
+        <h3 class="row justify-content-center card-title">Upload Image</h3>
+        <form action="http:\\localhost" method="post" enctype="multipart/form-data"
+              th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
+
           <div class="input-group">
             <div class="custom-file">
               <input type="file" class="custom-file-input" name="imagefile" id="imagefile">
               <label class="custom-file-label" for="imagefile">Choose file</label>
             </div>
           </div>
-          <button type="submit" class="btn info-color white-text">Submit</button>
+
+          <div class="row justify-content-center">
+            <button type="submit" class="btn info-color white-text">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
