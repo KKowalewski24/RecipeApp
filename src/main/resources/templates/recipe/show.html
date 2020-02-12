@@ -72,8 +72,7 @@
           <li class="list-group-item" th:each="ingredient : ${recipe.ingredients}"
               th:text="${(ingredient.getAmount() +
                        ' ' + ingredient.uom.getDescription() +
-                       ' - ' + ingredient.getDescription())}"
-          />
+                       ' - ' + ingredient.getDescription())}"/>
         </ul>
 
       </div>

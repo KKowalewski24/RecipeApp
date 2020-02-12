@@ -15,9 +15,10 @@
     <th:block th:insert="fragments/navbar :: navbar"/>
 
     <!-------------------- PANEL SECTION -------------------->
-    <form th:object="${ingredient}" method="post"
-          th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} ">
-      <div class="container my-5 card ">
+    <div class="container my-5 card ">
+      <form th:object="${ingredient}" method="post"
+            th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} ">
+
         <div class="card-body">
           <h5 class="row justify-content-center card-title">
             Edit Ingredient Information
@@ -56,8 +57,9 @@
           </div>
 
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
     <!-------------------- SCRIPT SECTION -------------------->
     <th:block th:insert="fragments/scripts :: scripts"/>
 
